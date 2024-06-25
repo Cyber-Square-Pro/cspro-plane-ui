@@ -24,3 +24,11 @@ export interface IProjectItem {
   icon: LucideIcon; 
   title: string;
 };
+
+// Author: Muhammed Adnan on June 1st, 2024
+export interface ISidebarItem {
+  key: string;
+  Icon: LucideIcon;
+  label: string;
+  href: string;
+}

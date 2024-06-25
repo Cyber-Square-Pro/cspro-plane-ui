@@ -10,13 +10,12 @@ import { useMobxStore } from "@/store/store.provider";
   Props: None
   Updated by: Mohammed Rifad on June 2nd, 2024 - implemented mobX to display
              current user data.
+             - Muhammed Adnan on June 3rd, 2024 - Adjust trigger style as needed.
 */
 
 const ProfilePopover: React.FC = () => {
 
-  const {
-    user: { currentUser },
-  } = useMobxStore();
+  const {user: { currentUser },} = useMobxStore();
   
   const displayChar = currentUser?.first_name[0].toUpperCase()
   const email = currentUser?.email
@@ -25,7 +24,7 @@ const ProfilePopover: React.FC = () => {
     <>
       <Popover>
         <PopoverTrigger>
-          <button className="bg-blue-900 text-white px-2 py-1 rounded w-7 h-7 flex items-center justify-center">
+          <button className="bg-blue-900 text-white px-2 py-1 mt-1 rounded w-6 h-6 outline-none flex items-center justify-center text-sm">
           { displayChar }
           </button>
         </PopoverTrigger>

@@ -22,6 +22,7 @@ Props: None
 Updated by: - Sreethu EA on May 24th, 2024 - Added Sign-out Fuctionality.
             - Mohammed Rifad on June 2nd, 2024 - implemented mobX to display
               workspaces and user data. Also made changes in signout button UI.               
+            - Muhammed Adnan on June 3rd, 2024 - Adjusted Trigger style as needed.
 */
 
 interface Props{
@@ -59,8 +60,8 @@ const WorkspacePopover: React.FC<Props> = (props) => {
     <>
       <Popover>
         <PopoverTrigger>
-          <button className="px-2 py-1 rounded flex items-center space-x-2">
-            <span className="bg-blue-900 text-white px-2 py-1 rounded w-7 h-7 flex items-center justify-center">
+          <button className="mx-1 px-1 py-1 rounded-md flex items-center space-x-2 hover:bg-zinc-200 w-[210px] outline-none">
+            <span className="bg-blue-900 text-white px-2 py-1 text-sm rounded w-6 h-6 flex items-center justify-center">
               {workspaceDisplayTxt}
             </span>
             <span className="text-black truncate text-base font-medium">

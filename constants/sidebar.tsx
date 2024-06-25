@@ -9,23 +9,23 @@ export const RouteList = [
     {
         icon: BarChart2,
         label: 'Analytics',
-        href: '/workspaces/analytics'
+        href: 'analytics'
     },
     {
         icon: BaggageClaimIcon,
         label: 'Projects',
-        href: '/workspaces/projects'
+        href: 'projects'
     },
     
     {
         icon: CheckCircle,
         label: 'All Issues',
-        href: '/issues'
+        href: 'issues'
     },
     {
         icon: Bell,
         label: 'Notifications',
-        href: '/notification'
+        href: 'notification'
     }
 ]
  

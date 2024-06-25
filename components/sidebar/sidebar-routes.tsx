@@ -30,7 +30,7 @@ const SidebarRoutes:FC<Props> = (props) => {
     }
     
   return (
-    <div className='flex flex-col w-full'>
+    <div className={`flex flex-col w-full ${isDisabled ? 'pointer-events-none opacity-50' : ''}`}>
         {
             routes.map((route) => (
                 <SidebarItem

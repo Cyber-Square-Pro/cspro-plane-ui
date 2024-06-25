@@ -35,8 +35,8 @@ export const DashboardOverView: React.FC = () => {
         </h1>
       </header>
 
-      <div className="relative h-full w-full overflow-x-hidden overflow-y-scroll scrollbar-md">
-        <div className="space-y-7 p-7 bg-zinc-100 h-full w-full flex flex-col overflow-y-auto vertical-scrollbar scrollbar-md mb-6">
+        <div className="flex-1 overflow-y-auto bg-zinc-100">
+        <div className="space-y-7 p-7 h-full w-full flex flex-col">
           <UserGreeting displayName = {userName} />
  
           <div className="grid lg:grid-cols-2 gap-7">

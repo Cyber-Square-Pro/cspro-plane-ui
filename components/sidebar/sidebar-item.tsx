@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
      - icon: LucideIcon - The icon to display in the sidebar item.
      - label: string - The label text for the sidebar item.
      - href: string - The target URL for the sidebar item.
-    Updated by: Muhammed Adnan on 21th May 2024 - Adjusted sidebar style as needed, Removed unwanted code 
+    Updated by: Muhammed Adnan on 21st May 2024 - Adjusted sidebar style as needed. 
                                                  for selected item.
  */
 
@@ -49,8 +49,8 @@ const SidebarItem = ({
     //    onClick={onClick}
        type='button'
        className={cn(
-        'flex items-center gap-x-2 text-sm text-slate-600 font-[500] pl-3 transition-all hover:text-slate-600 hover:bg-slate-300/20 mb-1 rounded-md',
-        isActive && 'text-sky-600 bg-sky-200/25 hover:bg-sky-200/20 hover:text-sky-700'
+        'flex items-center gap-x-2 text-[13px] text-slate-800 font-[500] pl-3 transition-all hover:text-slate-800 hover:bg-gray-200 mb-1 rounded-md',
+        isActive && 'text-sky-600 bg-blue-200/30 hover:bg-blue-200/30 hover:text-sky-600'
        )}
        >
         <div className='flex items-center gap-x-2 py-2'>
