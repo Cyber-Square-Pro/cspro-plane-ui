@@ -9,3 +9,11 @@ export const OrgSizeDropDownItems:string[] = [
     "50 - 249",
     "250+"
 ]
+export const dashboardDropdownItems:string[] = [
+    "None", 
+    "Due today", 
+    "Due this week",
+    "Due this month",
+    "Due this year",
+    "Custom"
+]
