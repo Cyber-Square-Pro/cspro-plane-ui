@@ -32,6 +32,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.2",
+    "react-select": "^5.8.0",
     "react-toastify": "^10.0.5",
     "set-cookie-parser": "^2.6.0",
     "swr": "^2.2.5",
