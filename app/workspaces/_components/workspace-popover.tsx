@@ -33,9 +33,11 @@ const WorkspacePopover: React.FC = () => {
     user: { currentUser, updateUserOnLogout },
   } = useMobxStore();
 
+  // updated by Aflaha - replace space in workspace name with hyphen in workspace popover
   const workspaceDisplayTxt = workspaces
-    ? workspaces[0].name[0].toUpperCase()
-    : "";
+  ? workspaces[0].name.replace(/\s+/g, "-")
+  : "";
+
   const email = currentUser?.email;
 
   //created by Sreethu -  Function to handle user logout
@@ -49,7 +51,6 @@ const WorkspacePopover: React.FC = () => {
       console.error("Logout failed:", error);
     }
   };
-
   return (
     <>
       <Popover>
@@ -59,7 +60,7 @@ const WorkspacePopover: React.FC = () => {
               {workspaceDisplayTxt}
             </span>
             <span className="text-black truncate text-base font-medium">
-              {workspaces && workspaces[0].name.replace(/\s+/g, "-")}
+              {workspaceDisplayTxt }
             </span>
           </button>
         </PopoverTrigger>
@@ -80,7 +81,7 @@ const WorkspacePopover: React.FC = () => {
                     {workspace.name[0].toUpperCase()}
                   </button>
                   <span className="truncate text-base text-sm font-medium text-slate-600 pl-2">
-                    {workspace.name}
+                  {workspaceDisplayTxt }
                   </span>
                   <div style={{ marginLeft: "70px" }}></div>
                   <Check />
@@ -100,6 +101,7 @@ const WorkspacePopover: React.FC = () => {
             </div>
             <br />
             <div className="flex items-center">
+              
               <Mails />
               <span className="ml-2 text-sm max-w-prose text-slate-600">
                 Workspace Invites

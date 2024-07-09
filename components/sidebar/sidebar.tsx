@@ -8,7 +8,7 @@ type Props = {
 const SideBar: FC<Props> = (props) => {
   
   const { workspaceSlug, isOnboarded } = props;
-  console.log('//', workspaceSlug)
+  
   return (
     <>
       <SidebarRoutes itemLink={workspaceSlug} isDisabled = {!isOnboarded}  />

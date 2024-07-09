@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const ProfileForm: React.FC<Props> = (props) => {
-  console.log(ProfileDropDownItems[0]);
+  
   const { onSubmit, isSubmitting } = props;
 
   const [selectedRole, setSelectedRole] = useState<string | null>(null);

@@ -38,10 +38,10 @@ export const Workspace: React.FC<Props> = observer((props) => {
   //     `/api/workspace-slug-check?slug=${formData.slug}`
   //   );
   //   const data = await apiResponse.json();
-  //   console.log(data.status, ";;;;");
+
 
   //   if (data.status == true) {
-  //     console.log('its true')
+  
   //     await workspaceStore.createWorkspace(formData).then((response: any) => {
   //       toast.showToast("success", response?.message);
   //       setTimeout(() => {
@@ -55,7 +55,7 @@ export const Workspace: React.FC<Props> = observer((props) => {
     await workspaceService
     .workspaceSlugCheck(formData?.slug ?? "")
     .then(async (response) => {
-      console.log(response.status,'**')
+      
       if (response.status === true) {
         await workspaceStore
           .createWorkspace(formData)

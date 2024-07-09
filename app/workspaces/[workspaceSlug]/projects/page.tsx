@@ -16,7 +16,7 @@ const ProjectListPage = observer(() => {
     </Button>,
   ];
 
-  console.log(commandPaletteStore.isCreateProjectModalOpen)
+  
   return (
     <>
     { commandPaletteStore.isCreateProjectModalOpen && (

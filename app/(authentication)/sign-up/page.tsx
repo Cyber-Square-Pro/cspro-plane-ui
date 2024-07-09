@@ -29,7 +29,7 @@ const SignUpPage = () => {
   const onFormSubmit = (formData: IEmailPasswordFormValues) => {
 
     return authService.userSignUp(formData).then((response) => {
-      console.log(response?.statusCode)
+      
       setIsSubmitting(true)
       if (response?.statusCode == 201) {
 

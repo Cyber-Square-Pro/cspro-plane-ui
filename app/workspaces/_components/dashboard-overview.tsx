@@ -26,7 +26,7 @@ export const DashboardOverView: React.FC = () => {
     } = useMobxStore();
 
    const userName = currentUser? currentUser?.first_name.toLowerCase() + " " + currentUser?.last_name.toLowerCase(): "" 
-    console.log(currentUser)
+    
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
       <header className="border-b-2 p-4 sticky top-0 bg-white z-10">
