@@ -35,7 +35,7 @@ const WorkspacePopover: React.FC = () => {
 
   // updated by Aflaha - replace space in workspace name with hyphen in workspace popover
   const workspaceDisplayTxt = workspaces
-  ? workspaces[0].name.replace(/\s+/g, "-")
+  ? workspaces[0].name[0].toUpperCase().replace(/\s+/g, "-")
   : "";
 
   const email = currentUser?.email;
@@ -60,7 +60,7 @@ const WorkspacePopover: React.FC = () => {
               {workspaceDisplayTxt}
             </span>
             <span className="text-black truncate text-base font-medium">
-              {workspaceDisplayTxt }
+              {workspaces && workspaces[0].name.replace(/\s+/g, "-")}
             </span>
           </button>
         </PopoverTrigger>
@@ -81,7 +81,7 @@ const WorkspacePopover: React.FC = () => {
                     {workspace.name[0].toUpperCase()}
                   </button>
                   <span className="truncate text-base text-sm font-medium text-slate-600 pl-2">
-                  {workspaceDisplayTxt }
+                  {workspace.name.replace(/\s+/g, "-")}
                   </span>
                   <div style={{ marginLeft: "70px" }}></div>
                   <Check />
