@@ -53,7 +53,7 @@ export const DashboardEntryIssueCard: React.FC<Props> = (props) => {
     },
     {
       Icon: Calendar,
-      description: "You added 3TEST-1 taskt to the cycle cycle 2",
+      description: "You added 3TEST-1 task to the cycle cycle 2",
       date: "3 days ago",
     },
     {
@@ -90,14 +90,14 @@ export const DashboardEntryIssueCard: React.FC<Props> = (props) => {
         </div>
       </div>
       <div className="px-7">
-        {itemsToShow.map((each, index) => (
+        {itemsToShow.map((item, index) => (
           <div key={index} className="flex mb-4 items-start text-sm font-normal text-slate-800">
             <div className="mt-2">
-              <each.Icon size={14} className="text-slate-600" />
+              <item.Icon size={14} className="text-slate-600" />
             </div>
             <div className="flex flex-col ml-4">
-              <h1 className="font-normal text-md">{each.description}</h1>
-              <h2 className="text-slate-600">{each.date}</h2>
+              <h1 className="font-normal text-md">{item.description}</h1>
+              <h2 className="text-slate-600">{item.date}</h2>
             </div>
           </div>
         ))}
