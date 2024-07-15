@@ -8,6 +8,7 @@ import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
 import { RecentProjects } from "./cards/recent-project-card";
 import { ActiveMembers } from "./cards/collabaration-card";
+import { DashboardEntryIssueCard } from "./cards/entry-issue-card";
 
 /*
   Author: Fidha Noushad on May 20th, 2024
@@ -16,7 +17,7 @@ import { ActiveMembers } from "./cards/collabaration-card";
   updated by: - Mohammed Rifad on May 23nd, 2024 - added reusable dashboard header
               - Muhammed Adnan on May 25th, 2024 - Sticky header, removed multi-scrollbar's
               - Fahadiya Binsy on June 6th, 2024 - Added Recent Project and Collaborates components
-
+              - Ridhwan on July 9th, 2024 - Added Issues list 
 */
 
 export const DashboardOverView: React.FC = () => {
@@ -68,9 +69,8 @@ export const DashboardOverView: React.FC = () => {
               title="Assigned by priority"
               description="Issues assigned to you, broken down by priority will show up here."
             />
-            <DashboardIssueCard
+            <DashboardEntryIssueCard
               title="Your issue activities"
-              description="All your issue activities across projects will show up here."
             />
             <RecentProjects />
           </div>
