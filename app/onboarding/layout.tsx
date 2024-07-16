@@ -21,7 +21,7 @@ export default function OnboardingLayout({
       {/* Navbar Section */}
       <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-6 xl:px-12">
         <div className="mb-4 lg:mb-0">
-          <Logo height={120} width={120} />
+          < height={120} width={120} />
         </div>
 
         <div className="flex items-center space-x-2">

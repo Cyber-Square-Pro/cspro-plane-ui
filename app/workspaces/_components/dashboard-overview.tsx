@@ -3,12 +3,10 @@ import React from "react";
 import { DashboardIssueCard } from "./cards/dashboard-issue-card";
 import { IssueStatusCard } from "./cards/issue-status-card";
 import { UserGreeting } from "./user-greeting";
-import {
-  BarChart2,
-  HomeIcon,
-} from "lucide-react";
+import {BarChart2,HomeIcon,} from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
+import GitHubLink from "./github-link";
  
 /*
   Author: Fidha Noushad on May 20th, 2024
@@ -29,10 +27,11 @@ export const DashboardOverView: React.FC = () => {
     console.log(currentUser)
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
-      <header className="border-b-2 p-4 sticky top-0 bg-white z-10">
+      <header className="border-b-2 p-4 sticky top-0 bg-white z-10 flex justify-between items-center">
         <h1>
           <DashboardHeader icon={HomeIcon} title="Home" />
         </h1>
+        <GitHubLink /> 
       </header>
 
         <div className="flex-1 overflow-y-auto bg-zinc-100">
