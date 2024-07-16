@@ -31,7 +31,7 @@ import { observer } from "mobx-react-lite";
                   added Mobx store feature.
 */
 
-const WorkspaceLayout = observer(({
+const WorkspaceLayout = ({
   children,
   params,
 }: {
@@ -48,6 +48,7 @@ const WorkspaceLayout = observer(({
   const { commandPalette: commandPaletteStore } = useMobxStore();
 
   console.log(commandPaletteStore.isCreateIssueModalOpen, "layout")
+
   return (
     <UserWrapper>
     <div className="min-h-screen flex">
@@ -87,8 +88,10 @@ const WorkspaceLayout = observer(({
         <main>{children}</main>
       </div>
     </div>
+  </div>
     </UserWrapper>
-  );
-})
+    );
+  
+}
 
 export default WorkspaceLayout;
