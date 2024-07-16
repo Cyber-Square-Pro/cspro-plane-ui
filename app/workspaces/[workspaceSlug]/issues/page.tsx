@@ -26,7 +26,7 @@ const AllIssuesPage = () => {
   // const openModal = () => setIsModalOpen(true);
   // const closeModal = () => setIsModalOpen(false);
   const issueHeaderOptions = [
-    <div className="flex gap-2">
+    <div className="flex gap-2" key="">
 <DropdownMenu>
   <DropdownMenuTrigger className="border rounded-md p-1 pl-7 pr-7">Filter</DropdownMenuTrigger>
   <DropdownMenuContent>
