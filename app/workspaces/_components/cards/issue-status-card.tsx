@@ -1,5 +1,13 @@
 import React from 'react';
 
+/* 
+  Author: Fidha Naushad on May 23, 2024
+  Purpose: Component to display issue status card with count and description
+  Props: 
+    - count: number (The count of issues)
+    - description: string (Description of the issue status)
+*/
+
 interface Props {
   count: number;
   description: string;

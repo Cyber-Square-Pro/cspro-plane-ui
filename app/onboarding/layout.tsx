@@ -2,6 +2,7 @@
 import { Logo } from "@/components/logo";
 import { Navbar } from "@/components/navbar";
 import SideBar from "@/components/sidebar/sidebar";
+import { RouteList } from "@/constants/sidebar";
 import { useMobxStore } from "@/store/store.provider";
 import { Mail } from "lucide-react";
 import "react-toastify/dist/ReactToastify.css";

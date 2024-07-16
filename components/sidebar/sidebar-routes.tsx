@@ -6,6 +6,11 @@ import { usePathname } from 'next/navigation'
 import { RouteList } from '@/constants/sidebar'
 
 
+/*
+  Author: Mohammed Rifad on April 22nd, 2024
+  Updated by: - Mohammed Rifad on June 5th, 2024 - made the routes dynamic.yy
+*/
+
 
 type Props = {
   itemLink?: string,
@@ -36,4 +41,4 @@ const SidebarRoutes:FC<Props> = (props) => {
   )
 }
 
-export default SidebarRoutes
+export default SidebarRoutes

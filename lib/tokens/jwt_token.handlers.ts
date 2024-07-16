@@ -6,7 +6,6 @@ import { AxiosRequestHeaders } from "axios";
 export const getTokensFromCookie = (headers: AxiosRequestHeaders, tokenType: string) =>{
 
   const cookieHeader = headers.Cookie;
-  console.log('your cookie value is' , cookieHeader)
    
 }
 
