@@ -6,7 +6,7 @@ const SettingsPage = ()=>{
   
  return (
     <>
-         
+         General page
     </>
   );
 };

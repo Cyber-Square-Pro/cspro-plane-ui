@@ -16,20 +16,17 @@ import { cn } from '@/lib/utils'
                                                  for selected item.
  */
 
-interface Props {
-    icon?: LucideIcon,
-    label: string,
-    href: string,
-    onItemClick: (label: string) => void,
-};
+interface ISidebarItem {
+    icon: LucideIcon
+    label: string
+    href: string
+}
 
 const SidebarItem = ({
     icon: Icon,
     label,
-    href,
-    onItemClick
-}: Props) => {
-
+    href
+}: ISidebarItem) => {
 
     const pathname = usePathname()
     const router = useRouter()
@@ -38,7 +35,6 @@ const SidebarItem = ({
     (pathname == href || pathname?.startsWith(`${href}/`))
 
     const onClick = () => {
-        onItemClick(label);
         router.push(href)
     }
  
@@ -46,7 +42,6 @@ const SidebarItem = ({
     return (
        <button
        onClick={onClick}
-    //    onClick={onClick}
        type='button'
        className={cn(
         'flex items-center gap-x-2 text-[13px] text-slate-800 font-[500] pl-3 transition-all hover:text-slate-800 hover:bg-gray-200 mb-1 rounded-md',
@@ -54,11 +49,10 @@ const SidebarItem = ({
        )}
        >
         <div className='flex items-center gap-x-2 py-2'>
-            {Icon && ( <Icon 
+            <Icon 
             size={16}
-            className={cn('text-slate-700', isActive &&'text-sky-600')}
-            />)}
-            
+            className={cn('text-slate-800', isActive &&'text-sky-600')}
+            />
             {label}
         </div>
 
@@ -66,4 +60,4 @@ const SidebarItem = ({
     )
 }
 
-export default SidebarItem
+export default SidebarItem

@@ -34,9 +34,9 @@ export default function OnboardingLayout({
        
       <div className="flex  flex-col lg:flex-row lg:justify-between pt-14 lg:pt-20 px-2 lg:px-8 xl:px-16">
          
-        {/* <div className="hidden lg:block lg:w-1/4">
-          <SideBar />
-        </div> */}
+        <div className="hidden lg:block lg:w-1/4">
+          <SideBar isOnboarded={false} />
+        </div>
 
         
         <div className="lg:w-full md:w-full md:px-0 flex md:items-center lg:px-40 lg:justify-start sm:justify-center">{children}</div>

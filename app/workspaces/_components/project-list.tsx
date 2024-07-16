@@ -35,7 +35,7 @@ const ProjectList = () => {
   return (
     <div className="relative">
       <button 
-        className="group flex items-center w-full px-3 py-1 text-sm font-medium text-left text-gray-900 hover:bg-gray-100 hover:rounded-md"
+        className="group flex items-center w-full px-3 py-1 text-sm font-medium text-left text-gray-900 hover:bg-gray-200 rounded-md"
         onClick={toggleDropdown}
       >
         <span className='font-bold text-slate-500 text-[13px]'>Your Projects</span>
@@ -49,7 +49,7 @@ const ProjectList = () => {
         </div>
       </button>
       {isOpen && (
-        <div className="absolute z-10 overflow-y-auto max-h-[400px] w-full mt-1 origin-top-right scrollbar-md">
+        <div className="absolute z-10 overflow-y-auto max-h-[45vh] w-full mt-1">
           {projects.map((project, index) => (
             <div key={index}>
               <button 

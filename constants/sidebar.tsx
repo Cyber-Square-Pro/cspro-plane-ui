@@ -29,37 +29,7 @@ export const RouteList = [
     }
 ]
  
-export const SettingsRouteList = [
-    { 
-        label: 'General',
-        href: '/settings'
-    },
-    {
-        label: 'Members',
-        href: '/workspaces/projects/settings/members'
-    },
-    {
-        label: 'Billing and Plans',
-        href: '/settings/billing' 
-    },
-    { 
-        label: 'Integrations', 
-        href: '/settings/integrations' 
-    },
-    { 
-        label: 'Imports',
-        href: '/settings/imports' 
-    },
-    {
-        label: 'Exports', 
-        href: '/settings/exports' 
-    },
-    {
-        label: 'Webhooks',
-        href: '/settings/webhooks' 
-    },
-    { 
-        label: 'API Tokens', 
-        href: '/settings/api-tokens' 
-    },
-  ];
+
+
+
+  

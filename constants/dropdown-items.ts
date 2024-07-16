@@ -1,3 +1,5 @@
+import { Circle } from "lucide-react";
+
 export const ProfileDropDownItems:string[] = [
         "Engineering/Development", 
         "Freelance", "Student"
@@ -10,9 +12,33 @@ export const OrgSizeDropDownItems:string[] = [
     "250+"
 ]
 
-export const AddMembersDropdownItems:string[] = [
-    "Guest", 
-    "Viewer", 
-    "Member",
-    "Admin"
-]
+export const PriorityDropDownItems: string[] = [
+    'Urgent',
+    'High',
+    'Medium',
+    'Low',
+    'None'
+  ];
+ 
+  export const StateDropDownItems: string[] = [
+    'Backlog',
+    'Todo',
+    'In Progress',
+    'Done',
+    'Cancelled'
+  ];
+  
+  export const AssigneeDropDownItems: string[] = [
+    'You',
+    'User1',
+    'User2'
+  ];
+ 
+
+  export const  AddMembersDropdownItems: string[] = [
+    'Guest',
+    'Admin',
+    'Member',
+    'Owner'
+  ];
+ 

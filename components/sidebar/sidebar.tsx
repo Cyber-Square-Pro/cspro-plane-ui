@@ -1,23 +1,17 @@
 import React, { FC } from "react";
 import SidebarRoutes from "./sidebar-routes";
-import { RouteList, SettingsRouteList } from "@/constants/sidebar";
 
-interface Props  {
+type Props = {
   workspaceSlug?: string;
-  isDisabled?: boolean;
-  routes: Array<{ icon?: any, label: string, href: string }>;
-  onItemClick: (label: string) => void;
-  
- 
-
+  isOnboarded: boolean
 };
 const SideBar: FC<Props> = (props) => {
-
-  const { workspaceSlug, isDisabled ,routes, onItemClick} = props;
- 
+  
+  const { workspaceSlug, isOnboarded } = props;
+  console.log('//', workspaceSlug)
   return (
     <>
-      <SidebarRoutes dashboardLink={workspaceSlug} isDisabled = {isDisabled} routes = {routes} onItemClick={onItemClick}/>
+      <SidebarRoutes itemLink={workspaceSlug} isDisabled = {!isOnboarded}  />
     </>
   );
 };

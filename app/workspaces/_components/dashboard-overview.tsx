@@ -3,30 +3,34 @@ import React from "react";
 import { DashboardIssueCard } from "./cards/dashboard-issue-card";
 import { IssueStatusCard } from "./cards/issue-status-card";
 import { UserGreeting } from "./user-greeting";
-import {
-  BarChart2,
-  HomeIcon,
-} from "lucide-react";
+import { BarChart2, HomeIcon } from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
- 
+import { RecentProjects } from "./cards/recent-project-card";
+import { ActiveMembers } from "./cards/collabaration-card";
+import { DashboardEntryIssueCard } from "./cards/entry-issue-card";
+
 /*
   Author: Fidha Noushad on May 20th, 2024
   Purpose: Renders Dashboard
   Props: None
   updated by: - Mohammed Rifad on May 23nd, 2024 - added reusable dashboard header
               - Muhammed Adnan on May 25th, 2024 - Sticky header, removed multi-scrollbar's
-
+              - Fahadiya Binsy on June 6th, 2024 - Added Recent Project and Collaborates components
+              - Ridhwan on July 9th, 2024 - Added Issues list 
 */
 
 export const DashboardOverView: React.FC = () => {
-   
   const {
     user: { currentUser },
-    } = useMobxStore();
+  } = useMobxStore();
 
-   const userName = currentUser? currentUser?.first_name.toLowerCase() + " " + currentUser?.last_name.toLowerCase(): "" 
-    console.log(currentUser)
+  const userName = currentUser
+    ? currentUser?.first_name.toLowerCase() +
+      " " +
+      currentUser?.last_name.toLowerCase()
+    : "";
+  console.log(currentUser);
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
       <header className="border-b-2 p-4 sticky top-0 bg-white z-10">
@@ -66,13 +70,15 @@ export const DashboardOverView: React.FC = () => {
               title="Assigned by priority"
               description="Issues assigned to you, broken down by priority will show up here."
             />
-            <DashboardIssueCard
+            <DashboardEntryIssueCard
               title="Your issue activities"
-              description="All your issue activities across projects will show up here."
             />
+            <RecentProjects />
           </div>
+          <ActiveMembers title="Collaborators" />
         </div>
       </div>
-    </div>
-  );
+        
+    </div>
+  );
 };
