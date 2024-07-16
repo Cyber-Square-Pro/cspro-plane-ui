@@ -22,7 +22,7 @@ export default function OnboardingLayout({
       {/* Navbar Section */}
       <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-6 xl:px-12">
         <div className="mb-4 lg:mb-0">
-          < height={120} width={120} />
+        <Logo height={120} width={120} />
         </div>
 
         <div className="flex items-center space-x-2">
@@ -39,7 +39,9 @@ export default function OnboardingLayout({
         </div>
 
         
-        <div className="lg:w-full md:w-full md:px-0 flex md:items-center lg:px-40 lg:justify-start sm:justify-center">{children}</div>
+        <div className="lg:w-full md:w-full md:px-0 flex md:items-center lg:px-40 lg:justify-start sm:justify-center">
+          {children}
+        </div>
       </div>
     </div>
   );
