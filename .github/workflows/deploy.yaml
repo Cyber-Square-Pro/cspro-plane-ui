@@ -30,12 +30,18 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}  # SSH private key for authentication
         
           script: |
+            chmod 600 ~/.ssh/id_ed25519
+            eval $(ssh-agent -s)
+            ssh-add ~/.ssh/id_ed25519 <<< "${{secrets.SSH_PASS_PHRASE }}"
+            git config --global core.sshCommand "ssh -i ~/.ssh/id_ed25519"
             export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v20.12.2/bin
             cd /home/ubuntu/PLANE-UI/DEV/cs-plane-ui
             git pull origin development
             npm run build   
             sudo systemctl restart nginx  # Restart nginx server
             pm2 restart cs-plane-dev   # restart pm2
+
+
    
 
 
