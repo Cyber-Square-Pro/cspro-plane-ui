@@ -6,6 +6,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+
 type Props = {
     dropDownTitle:string,
     dropDownItems:string[],
@@ -25,7 +26,9 @@ const CustomDropdown:React.FC<Props> = ({dropDownTitle,dropDownItems, onSelect})
     ) )}
     
   </DropdownMenuContent>
+  
 </DropdownMenu>
+
 
    </>
   )
