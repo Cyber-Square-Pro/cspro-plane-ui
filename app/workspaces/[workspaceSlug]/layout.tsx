@@ -23,6 +23,8 @@ import { observer } from "mobx-react-lite";
               - Sreethu EA on May 23rd, 2024 - Added popover component for workspace and profile 
               - Muhammed Adnan on May 25th, 2024 - Fixed behavior Sidebar, 
                                                    Adjusted padding, margin, icon-size as needed.
+              - Muhammed Adnan on May 25th, 2024 - Fixed behavior Sidebar, 
+                                                   Adjusted padding, margin, icon-size as needed.
               - Mohammed Rifad on June 2nd, 2024 - Moved workspace popover and profile popover UI
                 to components folder. Also wrapped layout with UserWrapper.
               - Nisha J on June 28th, 2024 - Added CreateNewIssue modal component for 'New Issue' button,
@@ -79,6 +81,8 @@ const WorkspaceLayout = observer(({
         </nav>
       </aside>
 
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <main>{children}</main>
       <div className="flex-1 flex flex-col overflow-hidden">
         <main>{children}</main>
       </div>

@@ -38,10 +38,11 @@ export const DashboardOverView: React.FC = () => {
           <DashboardHeader icon={HomeIcon} title="Home" />
         </h1>
       </header>
-      <div className="flex-1 overflow-y-auto bg-zinc-100">
-        <div className="space-y-7 p-7 h-full w-full flex flex-col">
-          <UserGreeting displayName={userName} />
 
+        <div className="flex-1 overflow-y-auto bg-zinc-100">
+        <div className="space-y-7 p-7 h-full w-full flex flex-col">
+          <UserGreeting displayName = {userName} />
+ 
           <div className="grid lg:grid-cols-2 gap-7">
             <div className="lg:col-span-2">
               <div className="bg-[#ffffff] rounded-xl border-[0.5px] w-full grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 p-0.5 hover:shadow-md duration-300 [&>div>a>div]:border-r [&>div:last-child>a>div]:border-0 [&>div>a>div]:border-2[&>div:nth-child(2)>a>div]:border-0 [&>div:nth-child(2)>a>div]:lg:border-r">
