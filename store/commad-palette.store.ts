@@ -47,7 +47,7 @@ export class CommandPaletteStore implements ICommandPaletteStore{
         } else {
           this.isCreateProjectModalOpen = !this.isCreateProjectModalOpen;
         }
-        console.log('value',   this.isCreateProjectModalOpen )
+        
       };
 
       // Created by Nisha J. on Jun 19th, 2024 

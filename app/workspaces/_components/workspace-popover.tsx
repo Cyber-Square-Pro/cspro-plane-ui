@@ -43,9 +43,11 @@ const WorkspacePopover: React.FC<Props> = (props) => {
     user: { currentUser, updateUserOnLogout },
   } = useMobxStore();
 
+  // updated by Aflaha - replace space in workspace name with hyphen in workspace popover
   const workspaceDisplayTxt = workspaces
-    ? workspaces[0].name[0].toUpperCase()
-    : "";
+  ? workspaces[0].name[0].toUpperCase().replace(/\s+/g, "-")
+  : "";
+
   const email = currentUser?.email;
 
   // Function to handle user logout
@@ -58,12 +60,14 @@ const WorkspacePopover: React.FC<Props> = (props) => {
       console.error("Logout failed:", error);
     }
   };
+ 
 
   // Function to handle item click
   const handleItemClick = () => {
     setOpen(false);
   };
 
+ 
   return (
     <>
       <Popover isOpen={open} onOpenChange={setOpen}>
@@ -98,7 +102,7 @@ const WorkspacePopover: React.FC<Props> = (props) => {
                     {workspace.name[0].toUpperCase()}
                   </button>
                   <span className="truncate text-base text-sm font-medium text-slate-600 pl-2">
-                    {workspace.name}
+                  {workspace.name.replace(/\s+/g, "-")}
                   </span>
                   <div style={{ marginLeft: "70px" }}></div>
                   <Check />
@@ -117,6 +121,7 @@ const WorkspacePopover: React.FC<Props> = (props) => {
               </span>
             </div>
             <br />
+
             <div className="flex items-center cursor-pointer" onClick={handleItemClick}>
               <Link href={"/invitations"} className="flex items-center">
                 <Mails />
@@ -124,6 +129,7 @@ const WorkspacePopover: React.FC<Props> = (props) => {
                   Workspace Invites
                 </span>
               </Link>
+
             </div>
             <br />
             <div className="flex items-center cursor-pointer" onClick={handleItemClick}>
