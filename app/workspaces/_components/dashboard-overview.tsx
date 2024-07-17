@@ -3,7 +3,7 @@ import React from "react";
 import { DashboardIssueCard } from "./cards/dashboard-issue-card";
 import { IssueStatusCard } from "./cards/issue-status-card";
 import { UserGreeting } from "./user-greeting";
-import GitHubLink from "./github-link";
+// import GitHubLink from "./github-link";
 import { BarChart2, HomeIcon } from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
@@ -35,7 +35,7 @@ export const DashboardOverView: React.FC = () => {
         <h1>
           <DashboardHeader icon={HomeIcon} title="Home" />
         </h1>
-        <GitHubLink /> 
+        {/* <GitHubLink />  */}
       </header>
 
         <div className="flex-1 overflow-y-auto bg-zinc-100">
