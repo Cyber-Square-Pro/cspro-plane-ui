@@ -2,14 +2,17 @@
 import { Logo } from "@/components/logo";
 import { Navbar } from "@/components/navbar";
 import SideBar from "@/components/sidebar/sidebar";
-import { OnboardingRouteList} from "@/constants/sidebar";
-import { SidebarTypes} from "@/constants/sidebarx";
+import { AttendanceRouteList } from "@/constants/sidebar";
+import { SidebarTypes } from "@/constants/sidebarx";
 import { useMobxStore } from "@/store/store.provider";
-import { Mail } from "lucide-react";
 import "react-toastify/dist/ReactToastify.css";
 
-
-export default function OnboardingLayout({
+/*
+  Author: Sreethu on July 24th, 2024
+  Purpose: Renders layout for team pages 
+*/
+ 
+export default function AttendanceLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -26,22 +29,19 @@ export default function OnboardingLayout({
         <Logo height={120} width={120} />
         </div>
 
-        <div className="flex items-center space-x-2">
-          <Mail />
-          <p className="text-blue-700 font-bold">{ currentUser?.email } </p>
-        </div>
+       
       </div>
 
        
-      <div className="flex  flex-col lg:flex-row lg:justify-between pt-14 lg:pt-20 px-2 lg:px-8 xl:px-16">
+      <div className="flex  flex-col lg:flex-row lg:justify-between  px-2 lg:px-8 xl:px-16 pt-5">
          
         <div className="hidden lg:block lg:w-1/4">
-          <SideBar isOnboarded={false} type={SidebarTypes.ONBOARDING}/>
+          <SideBar isOnboarded={true} type = {SidebarTypes.ATTENDANCE} />
         </div>
 
         
-        <div className="lg:w-full md:w-full md:px-0 flex md:items-center lg:px-40 lg:justify-start sm:justify-center">
-          {children}
+        <div className="w-full py-10 flex items-center justify-center  px-20 md:px-40">
+            {children}
         </div>
       </div>
     </div>
