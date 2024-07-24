@@ -11,6 +11,7 @@ import { useState } from "react";
 import { CreateIssueModal } from "../_components/modals/create-issue-modal";
 import { useMobxStore } from "@/store/store.provider";
 import { observer } from "mobx-react-lite";
+import { SidebarTypes } from "@/constants/sidebarx";
 
 /*
   Author: Reshma on April 21st, 2024
@@ -72,7 +73,7 @@ const WorkspaceLayout = ({
             </button>
           </div>
           <div className="w-full cursor-pointer mt-3">
-            <SideBar isOnboarded={true} workspaceSlug={workspaceSlug} />
+            <SideBar isOnboarded={true} workspaceSlug={workspaceSlug} type={SidebarTypes.ONBOARDING} />
              
           </div>
 
