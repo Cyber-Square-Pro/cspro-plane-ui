@@ -3,11 +3,13 @@ import React from "react";
 import { DashboardIssueCard } from "./cards/dashboard-issue-card";
 import { IssueStatusCard } from "./cards/issue-status-card";
 import { UserGreeting } from "./user-greeting";
-import { BarChart2, HomeIcon } from "lucide-react";
+import { BarChart2, CircleUserRoundIcon, HomeIcon } from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
 import { RecentProjects } from "./cards/recent-project-card";
 import { ActiveMembers } from "./cards/collabaration-card";
+import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react"; // Import NextUI components
+
 
 /*
   Author: Fidha Noushad on May 20th, 2024
@@ -29,13 +31,40 @@ export const DashboardOverView: React.FC = () => {
       " " +
       currentUser?.last_name.toLowerCase()
     : "";
-  console.log(currentUser);
-  return (
+    const userRole= currentUser?.role;   
+
+    console.log("currentUser:",currentUser);
+    console.log("user Role:",userRole);
+  
+  
+  return (   
     <div className="flex flex-col h-full w-full overflow-hidden">
-      <header className="border-b-2 p-4 sticky top-0 bg-white z-10">
-        <h1>
+      <header className="border-b-2 p-4 sticky top-0 bg-white z-10 flex justify-between items-center">
+        <h1 className="flex items-center">
           <DashboardHeader icon={HomeIcon} title="Home" />
         </h1>
+        
+        <Popover>
+          <PopoverTrigger>
+            <button id="adminButton" className="admin-button">
+              <CircleUserRoundIcon className="w-6 h-6" />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent className="p-4 bg-white shadow-lg rounded-lg mt-2">
+            <div className="flex flex-col space-y-2">
+              <ul className="list-none p-0 m-0">
+                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Team</li>
+                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Member</li>
+                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Attendance</li>
+                <ul className="list-disc pl-6 mt-2">
+                  <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Attendance</li>
+                  <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">View Attendance</li>
+                </ul>
+              </ul>
+            </div>
+          </PopoverContent>
+        </Popover>
+      
       </header>
       <div className="flex-1 overflow-y-auto bg-zinc-100">
         <div className="space-y-7 p-7 h-full w-full flex flex-col">
