@@ -31,15 +31,15 @@ const SignInPage = () => {
   const handleLoginRedirection = useCallback(
    
     (user: IUser) => {
-       
+       console.log('is onboarders', user.is_onboarded)
       if (!user.is_onboarded) {
-      
+        console.log('redirecting...')
         router.push("/onboarding");
         return;
       }
 
       fetchCurrentUserSettings().then((userSettings: IUserSettings) => {
-        
+        console.log("sett", userSettings);
         const workspaceSlug =
           userSettings?.workspace?.last_workspace_slug ||
           userSettings?.workspace?.fallback_workspace_slug;
@@ -78,7 +78,7 @@ const SignInPage = () => {
       // const responseData = await response.json();
 
       // if (responseData.statusCode == 200) {
-      
+      //   console.log('success')
       //   setLoading(true);
       //   mutateUserInfo();
       //   setTimeout(() => {
