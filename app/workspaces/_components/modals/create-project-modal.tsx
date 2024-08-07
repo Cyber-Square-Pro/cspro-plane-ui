@@ -4,6 +4,7 @@ import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { useMobxStore } from '@/store/store.provider';
 import ProjectCreateForm from '@/components/forms/account/project-create-form';
 import { ICreateProjectForm } from '@/types/project';
+import Image from 'next/image';
 
 /* 
   Updated by: Archana K on July 16th, 2024 - Added popovers for emoji picker and file uploader and created their corresponding buttons.
@@ -185,11 +186,8 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
                                 >
                                   Edit
                                 </button>
-                                <img
+                                <Image
                                   alt="image"
-                                  loading="lazy"
-                                  decoding="async"
-                                  data-nimg="fill"
                                   className="rounded-lg"
                                   src={backgroundImage}
                                   style={{ position: 'absolute', height: '100%', width: '100%', inset: '0px', objectFit: 'cover', color: 'transparent' }}

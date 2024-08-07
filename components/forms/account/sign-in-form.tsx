@@ -66,7 +66,7 @@ export const SignInForm: React.FC<Props> = (props) => {
         </Button>
       </div>
       <div className="py-2 text-center">
-        <span className="bg-slate-50">Don't have an account?</span>
+        <span className="bg-slate-50">{`Don't have an account?`}</span>
         <Link href="/sign-up"> Signup</Link>
       </div>
     </form>
