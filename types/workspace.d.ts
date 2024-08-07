@@ -32,3 +32,10 @@ export interface ISidebarItem {
   label: string;
   href: string;
 }
+
+export interface IWSidebarItem {
+  key: string;
+  label: string;
+  href: string;
+}
+

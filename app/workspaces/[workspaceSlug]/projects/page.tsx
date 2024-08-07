@@ -11,6 +11,7 @@ import { CreateProjectModal } from '../../_components/modals/create-project-moda
 const ProjectListPage = observer(() => {
   const { commandPalette: commandPaletteStore } = useMobxStore();
 
+
   // Function to handle opening and closing of the modal
   const handleAddProjectClick = () => {
     if (!commandPaletteStore.isCreateProjectModalOpen) {
@@ -19,6 +20,8 @@ const ProjectListPage = observer(() => {
       commandPaletteStore.toggleCreateProjectModal(); // Close modal if already open
     }
   };
+
+  
 
   return (
     <>

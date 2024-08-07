@@ -38,6 +38,12 @@ export interface IEmailPasswordFormValues {
     code: string
   }
 
+  export interface IAddMemberFormValues{
+    email: string;
+    role: string;
+    workspace_name: string;
+  }
+
 export type TOnboardingSteps = {
     email_verified: boolean;
     profile_complete: boolean;

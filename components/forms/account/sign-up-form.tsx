@@ -27,7 +27,7 @@ export const SignUpForm: React.FC<Props> = (props) => {
     mode: "onChange",
   });
   const { onFormSubmit, isSubmitting } = props;
-  console.log(errors);
+  
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <div className="py-2">

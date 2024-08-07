@@ -23,7 +23,7 @@ export const VerifyEmail: React.FC<Props> = observer((props) => {
  
     const submitCode = async (formData: IVerificationCode) => {
       return emailService.verifyEmail(formData).then(async (response) => {
-        console.log(formData);
+        
         if (response?.statusCode == 200) {
           toast.showToast("success", response?.message);
         
