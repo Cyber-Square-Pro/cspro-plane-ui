@@ -3,13 +3,15 @@ import React from "react";
 import { DashboardIssueCard } from "./cards/dashboard-issue-card";
 import { IssueStatusCard } from "./cards/issue-status-card";
 import { UserGreeting } from "./user-greeting";
-// import GitHubLink from "./github-link";
-import { BarChart2, HomeIcon } from "lucide-react";
+import { BarChart2, CircleUserRoundIcon, HomeIcon } from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
 import { RecentProjects } from "./cards/recent-project-card";
 import { ActiveMembers } from "./cards/collabaration-card";
+import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react"; // Import NextUI components
+
 import { DashboardEntryIssueCard } from "./cards/entry-issue-card";
+
 
 /*
   Author: Fidha Noushad on May 20th, 2024
@@ -36,6 +38,26 @@ export const DashboardOverView: React.FC = () => {
           <DashboardHeader icon={HomeIcon} title="Home" />
         </h1>
         {/* <GitHubLink />  */}
+  <Popover>
+          <PopoverTrigger>
+            <button id="adminButton" className="admin-button">
+              <CircleUserRoundIcon className="w-6 h-6" />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent className="p-4 bg-white shadow-lg rounded-lg mt-2">
+            <div className="flex flex-col space-y-2">
+              <ul className="list-none p-0 m-0">
+                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Team</li>
+                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Member</li>
+                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Attendance</li>
+                <ul className="list-disc pl-6 mt-2">
+                  <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Attendance</li>
+                  <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">View Attendance</li>
+                </ul>
+              </ul>
+            </div>
+          </PopoverContent>
+        </Popover>
       </header>
 
         <div className="flex-1 overflow-y-auto bg-zinc-100">
