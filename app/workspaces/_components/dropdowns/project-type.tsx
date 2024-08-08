@@ -57,7 +57,7 @@ export const ProjectTypeDropdown:React.FC<Props> = (props) => {
                           <span className="ps-1 text-[13px] text-gray-900">
                             Private
                           </span>
-                          <span className="text-[12px] text-muted text-gray-500">
+                          <span className="text-[12px] text-gray-400">
                             Accessible only by invite
                           </span>
                         </div>
@@ -82,7 +82,7 @@ export const ProjectTypeDropdown:React.FC<Props> = (props) => {
                           <span className="ps-1 text-[13px] text-gray-900">
                             Public
                           </span>
-                          <span className="text-[12px] text-muted text-gray-500">
+                          <span className="text-[12px] text-gray-400">
                             Anyone in the workspace can join
                           </span>
                         </div>

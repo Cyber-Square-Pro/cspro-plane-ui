@@ -14,7 +14,7 @@ export class AuthService extends APIService {
 
 
     async userSignUp(data:IEmailPasswordFormValues): Promise<any> {
-        console.log(data)
+        
           return this.axiosObj.post(API_BASE_URL + "/api/user/sign-up/", data, { headers: {} })
             .then((response) => {
               this.setAccessToken(response?.data?.accessToken);
@@ -30,7 +30,7 @@ export class AuthService extends APIService {
         
          return this.axiosObj.post(API_BASE_URL +"/api/user/sign-in/", data)
               .then((response) => {
-                console.log('response is ', response?.data.statusCcode)
+                
                 this.setAccessToken(response?.data?.accessToken);
                 this.setRefreshToken(response?.data?.refreshToken);
                 return response?.data;
