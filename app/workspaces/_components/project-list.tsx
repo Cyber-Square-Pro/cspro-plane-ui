@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronRight, Plus, MoreHorizontal } from 'lucide-react';
 import { projectItems } from '@/constants/workspace';
+import { useRouter } from 'next/navigation';
 
 /*
   Author: Muhammed Adnan on May 21st, 2024
@@ -10,7 +11,9 @@ import { projectItems } from '@/constants/workspace';
   Updated by: - Muhammed Adnan on May 24th, 2024 - Adjusted Padding and radius as needed
  */ 
 
+
 const ProjectList = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
@@ -69,7 +72,7 @@ const ProjectList = () => {
               {selectedProject === project && (
                 <div className="pl-8">
                   {projectItems.map((item, index) => (
-                    <button key={index} className="flex items-center w-full px-4 py-1 mb-1 text-[13px] text-gray-700 hover:bg-gray-100">
+                    <button key={index} className="flex items-center w-full px-4 py-1 mb-1 text-[13px] text-gray-700 hover:bg-gray-100" onClick={()=>router.push(item.href)}>
                       <item.icon size={14}/>
                       <span className="ml-2">{item.title}</span>
                     </button>

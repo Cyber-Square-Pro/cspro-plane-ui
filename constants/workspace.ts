@@ -23,12 +23,12 @@ export const RESTRICTED_URLS = [
 
 // Created by: Muhammed Adnan on May 23rd, 2024
   export const projectItems: IProjectItem[] = [
-    { icon: Layers3, title: "Backlogs" },
-    { icon: Contrast, title: "Sprints" },
-    { icon: Dice4, title: "Modules" },
-    { icon: FileVideo, title: "Views" },
-    { icon: FileText, title: "Pages" },
-    { icon: Settings, title: "Settings" }
+    { icon: Layers3, title: "Backlogs", href: "/workspaces/[workspaceSlug]/projects/testproject/backlog"},
+    { icon: Contrast, title: "Sprints", href: "/sprints"},
+    { icon: Dice4, title: "Modules", href: "/modules"},
+    { icon: FileVideo, title: "Views", href: "/views"},
+    { icon: FileText, title: "Pages", href: "/pages"},
+    { icon: Settings, title: "Settings", href: "/settings"}
   ];
 
 

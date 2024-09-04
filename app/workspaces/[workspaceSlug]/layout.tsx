@@ -85,9 +85,6 @@ const WorkspaceLayout = ({
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <main>{children}</main>
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <main>{children}</main>
-      </div>
     </div>
   </div>
     </UserWrapper>

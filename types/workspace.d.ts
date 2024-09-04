@@ -23,6 +23,7 @@ export interface IWorkspace {
 export interface IProjectItem {
   icon: LucideIcon; 
   title: string;
+  href: string;
 };
 
 // Author: Muhammed Adnan on June 1st, 2024
