@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { AddBacklogForm } from "@/components/forms/backlog/add-backlog-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TAddBacklogValidator } from "@/lib/validators/add-backlog.validator";
+import { TAddBacklogValidator } from "@/lib/validators/add-backlog.validator"
 
 interface CreateStoryCardProps {
   onCreateStory: (newStory: TAddBacklogValidator) => void;

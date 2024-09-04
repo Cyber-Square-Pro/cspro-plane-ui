@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Spinner } from "@/components/spinner";
-import { AddBacklogValidator, TAddBacklogValidator } from "@/lib/validators/add-backlog.validator";
+import { AddBacklogValidator, TAddBacklogValidator } from "@/lib/validators/add-backlog.validator"
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface AddBacklogFormProps {
