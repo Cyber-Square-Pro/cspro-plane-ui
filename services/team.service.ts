@@ -6,8 +6,15 @@ export class TeamService extends APIService {
     constructor() {
       super(API_BASE_URL);
     }
+  
 
     async addTeam(data: ITeam): Promise<any>{
-        console.log("Calling Api")
+      console.log("Calling Api")
+        return this.post("/team/add/", data)
+          .then((response) => response?.data)
+          .catch((error) => {
+            throw error?.response?.data;
+          });
+        
     }
 }
