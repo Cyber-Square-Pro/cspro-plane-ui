@@ -11,6 +11,7 @@ import { ActiveMembers } from "./cards/collabaration-card";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react"; // Import NextUI components
 
 import { DashboardEntryIssueCard } from "./cards/entry-issue-card";
+import { useRouter } from "next/navigation";
 
 
 /*
@@ -28,9 +29,13 @@ export const DashboardOverView: React.FC = () => {
     user: { currentUser },
   } = useMobxStore();
 
-
+  const router = useRouter();
    const userName = currentUser? currentUser?.first_name.toLowerCase() + " " + currentUser?.last_name.toLowerCase(): "" 
-        
+       
+   const redirectToTeamPage = () =>{
+    
+    router.push('/team')
+   }
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
       <header className="border-b-2 p-4 sticky top-0 bg-white z-10 flex justify-between items-center">
@@ -38,31 +43,17 @@ export const DashboardOverView: React.FC = () => {
           <DashboardHeader icon={HomeIcon} title="Home" />
         </h1>
         {/* <GitHubLink />  */}
-  <Popover>
-          <PopoverTrigger>
+ 
+           
             <button id="adminButton" className="admin-button">
-              <CircleUserRoundIcon className="w-6 h-6" />
+              <CircleUserRoundIcon onClick={redirectToTeamPage} className="w-6 h-6" />
             </button>
-          </PopoverTrigger>
-          <PopoverContent className="p-4 bg-white shadow-lg rounded-lg mt-2">
-            <div className="flex flex-col space-y-2">
-              <ul className="list-none p-0 m-0">
-                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Team</li>
-                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Member</li>
-                <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Attendance</li>
-                <ul className="list-disc pl-6 mt-2">
-                  <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">Add Attendance</li>
-                  <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer rounded">View Attendance</li>
-                </ul>
-              </ul>
-            </div>
-          </PopoverContent>
-        </Popover>
+           
       </header>
 
         <div className="flex-1 overflow-y-auto bg-zinc-100">
         <div className="space-y-7 p-7 h-full w-full flex flex-col">
-          <UserGreeting displayName = {userName} />
+          {/* <UserGreeting displayName = {userName} /> */}
  
           <div className="grid lg:grid-cols-2 gap-7">
             <div className="lg:col-span-2">
