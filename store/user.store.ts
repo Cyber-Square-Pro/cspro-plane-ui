@@ -85,7 +85,7 @@ export class UserStore implements IUserStore {
         } as IUser;
       });
 
-      console.log('in service', data)
+      
       const response = await this.userService.updateUser(data);
 
       runInAction(() => {
@@ -107,7 +107,7 @@ export class UserStore implements IUserStore {
   // }
 
   updateUserOnBoard = async () => {
-    console.log('updatimg user onboard')
+    
     try {
       runInAction(() => {
         this.currentUser = {

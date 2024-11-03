@@ -5,8 +5,7 @@ import { IAddMemberFormValues, IVerificationCode } from "@/types/user";
 
 export class EmailService extends APIService {
     constructor() {
-      console.log('next url', API_BASE_URL
-      );
+      
       
       super(API_BASE_URL);
     }
@@ -23,7 +22,7 @@ export class EmailService extends APIService {
       }
 
       async verifyEmail(formData:IVerificationCode): Promise<any> {
-        console.log(formData)
+        
         
         return this.post("/api/users/email/verify/", formData, { headers: this.getAccessToken() ? this.getHeaders() : {}, })
           .then((response) => {

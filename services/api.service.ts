@@ -34,7 +34,6 @@
         async (error: AxiosError) => {
           if (error.response && error.response.status === 401) {
             // Handle 401 Unauthorized error
-            console.log('it is an unauthorised request')
             await this.handleUnauthorizedError();
           }
           return Promise.reject(error);
@@ -46,7 +45,6 @@
       const refreshToken = this.getRefreshToken();
       if (refreshToken) {
         try {
-          console.log('requesting access token', refreshToken)
 
           
           // Request new access token using refresh token
@@ -54,7 +52,6 @@
           const newAccessToken = response.data.access;
 
           // Update access token
-          console.log('setting new access token', newAccessToken);
           
           this.setAccessToken(newAccessToken);
         } catch (error) {
@@ -112,7 +109,6 @@
 
     get(url: string, config = {}): Promise<any> {
 
-      console.log(this.getAccessToken() ? this.getHeaders() : {},)
       try {
 
 
@@ -133,7 +129,6 @@
 
     post(url: string, data = {}, config = {}): Promise<any> {
 
-      console.log('post is working')
       try {
 
         return axios({
@@ -146,7 +141,6 @@
 
       }
       catch (error) {
-        console.log('no tokennnnnnnn');
         
         return Promise.reject(error);
       }

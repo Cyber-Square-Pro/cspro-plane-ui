@@ -1,37 +1,50 @@
-"use client";
-import React from "react";
-import DashboardHeader from "../../_components/headers/dashboard-header";
-import { BaggageClaim, Link, Pencil, Search, Star } from "lucide-react";
-import { ProjectListCard } from "../../_components/cards/project-list-card";
-import { Button } from "@/components/ui/button";
-import { useMobxStore } from "@/store/store.provider";
-import { CreateProjectModal } from "../../_components/modals/create-project-modal";
-import { observer } from "mobx-react-lite";
+'use client'
+import React from 'react';
+import { BaggageClaim } from 'lucide-react'; // Adjust Lucide icons as needed
+import { observer } from 'mobx-react-lite';
+import { useMobxStore } from '@/store/store.provider';
+import DashboardHeader from '../../_components/headers/dashboard-header';
+import { ProjectListCard } from '../../_components/cards/project-list-card';
+import { Button } from '@/components/ui/button'; // Adjust path as necessary
+import { CreateProjectModal } from '../../_components/modals/create-project-modal';
 
 const ProjectListPage = observer(() => {
   const { commandPalette: commandPaletteStore } = useMobxStore();
-  const projectHeaderOptions = [
-    <Button key="addProjectBtn" className="h-[30px] text-[12px]" onClick={() => commandPaletteStore.toggleCreateProjectModal(true)}>
-      Add Project
-    </Button>,
-  ];
 
-  console.log(commandPaletteStore.isCreateProjectModalOpen)
+
+  // Function to handle opening and closing of the modal
+  const handleAddProjectClick = () => {
+    if (!commandPaletteStore.isCreateProjectModalOpen) {
+      commandPaletteStore.toggleCreateProjectModal(); // Open modal if not already open
+    } else {
+      commandPaletteStore.toggleCreateProjectModal(); // Close modal if already open
+    }
+  };
+
+  
+
   return (
     <>
-    { commandPaletteStore.isCreateProjectModalOpen && (
-        <CreateProjectModal/>
-    )}
+      {/* Render CreateProjectModal if isCreateProjectModalOpen is true */}
+      {commandPaletteStore.isCreateProjectModalOpen && (
+        <CreateProjectModal openModal={commandPaletteStore.toggleCreateProjectModal} />
+      )}
+
       <DashboardHeader
         icon={BaggageClaim}
-        title="projects"
-        optionList={projectHeaderOptions}
+        title="Projects"
+        // Option list including the Add Project button
+        optionList={[
+          <Button key="addProjectBtn" className="h-[30px] text-[12px]" onClick={handleAddProjectClick}>
+            Add Project
+          </Button>,
+        ]}
       />
 
       <div className="flex flex-row">
         <ProjectListCard
           isStarred={true}
-          projectDesc="test project"
+          projectDesc="Test project"
           projectName="Rifad Test"
           identifier="TEST"
         />
@@ -39,7 +52,7 @@ const ProjectListPage = observer(() => {
         <ProjectListCard
           backgroundImg="https://windows10spotlight.com/wp-content/uploads/2023/01/81a6e74c8adbf7f55406e8c4b80669d5.jpg"
           isStarred={false}
-          projectDesc="test project 2"
+          projectDesc="Test project 2"
           projectName="Rifad Test"
           identifier="TESwT"
         />

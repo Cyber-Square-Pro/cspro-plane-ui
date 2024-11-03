@@ -3,11 +3,16 @@ import React from "react";
 import { DashboardIssueCard } from "./cards/dashboard-issue-card";
 import { IssueStatusCard } from "./cards/issue-status-card";
 import { UserGreeting } from "./user-greeting";
-import { BarChart2, HomeIcon } from "lucide-react";
+import { BarChart2, CircleUserRoundIcon, HomeIcon } from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
 import { RecentProjects } from "./cards/recent-project-card";
 import { ActiveMembers } from "./cards/collabaration-card";
+import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react"; // Import NextUI components
+
+import { DashboardEntryIssueCard } from "./cards/entry-issue-card";
+import { useRouter } from "next/navigation";
+
 
 /*
   Author: Fidha Noushad on May 20th, 2024
@@ -16,7 +21,7 @@ import { ActiveMembers } from "./cards/collabaration-card";
   updated by: - Mohammed Rifad on May 23nd, 2024 - added reusable dashboard header
               - Muhammed Adnan on May 25th, 2024 - Sticky header, removed multi-scrollbar's
               - Fahadiya Binsy on June 6th, 2024 - Added Recent Project and Collaborates components
-
+              - Ridhwan on July 9th, 2024 - Added Issues list 
 */
 
 export const DashboardOverView: React.FC = () => {
@@ -24,23 +29,32 @@ export const DashboardOverView: React.FC = () => {
     user: { currentUser },
   } = useMobxStore();
 
-  const userName = currentUser
-    ? currentUser?.first_name.toLowerCase() +
-      " " +
-      currentUser?.last_name.toLowerCase()
-    : "";
-  console.log(currentUser);
+  const router = useRouter();
+   const userName = currentUser? currentUser?.first_name.toLowerCase() + " " + currentUser?.last_name.toLowerCase(): "" 
+       
+   const redirectToTeamPage = () =>{
+    
+    router.push('/team')
+   }
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
-      <header className="border-b-2 p-4 sticky top-0 bg-white z-10">
+      <header className="border-b-2 p-4 sticky top-0 bg-white z-10 flex justify-between items-center">
         <h1>
           <DashboardHeader icon={HomeIcon} title="Home" />
         </h1>
+        {/* <GitHubLink />  */}
+ 
+           
+            <button id="adminButton" className="admin-button">
+              <CircleUserRoundIcon onClick={redirectToTeamPage} className="w-6 h-6" />
+            </button>
+           
       </header>
-      <div className="flex-1 overflow-y-auto bg-zinc-100">
-        <div className="space-y-7 p-7 h-full w-full flex flex-col">
-          <UserGreeting displayName={userName} />
 
+        <div className="flex-1 overflow-y-auto bg-zinc-100">
+        <div className="space-y-7 p-7 h-full w-full flex flex-col">
+          {/* <UserGreeting displayName = {userName} /> */}
+ 
           <div className="grid lg:grid-cols-2 gap-7">
             <div className="lg:col-span-2">
               <div className="bg-[#ffffff] rounded-xl border-[0.5px] w-full grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 p-0.5 hover:shadow-md duration-300 [&>div>a>div]:border-r [&>div:last-child>a>div]:border-0 [&>div>a>div]:border-2[&>div:nth-child(2)>a>div]:border-0 [&>div:nth-child(2)>a>div]:lg:border-r">
@@ -68,16 +82,15 @@ export const DashboardOverView: React.FC = () => {
               title="Assigned by priority"
               description="Issues assigned to you, broken down by priority will show up here."
             />
-            <DashboardIssueCard
+            <DashboardEntryIssueCard
               title="Your issue activities"
-              description="All your issue activities across projects will show up here."
             />
             <RecentProjects />
           </div>
           <ActiveMembers title="Collaborators" />
         </div>
       </div>
-        
-    </div>
-  );
+    </div>
+  );
 };
+ 
