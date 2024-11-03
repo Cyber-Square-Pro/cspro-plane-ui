@@ -1,6 +1,6 @@
 import { useMobxStore } from '@/store/store.provider';
 import { IProjectItem } from '@/types/workspace';
-import { Layers3, Contrast, Dice4, FileVideo, FileText, Settings } from 'lucide-react';
+import { Layers3, Contrast, Dice4, FileVideo, FileText, Settings , BarChartHorizontal} from 'lucide-react';
 
 
 
@@ -28,7 +28,8 @@ export const RESTRICTED_URLS = [
     { icon: Dice4, title: "Modules" },
     { icon: FileVideo, title: "Views" },
     { icon: FileText, title: "Pages" },
-    { icon: Settings, title: "Settings" }
+    { icon: Settings, title: "Settings" },
+    {icon: BarChartHorizontal, title: "Timeline"},
   ];
 
 

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronRight, Plus, MoreHorizontal } from 'lucide-react';
 import { projectItems } from '@/constants/workspace';
+import Link from "next/link";
 
 /*
   Author: Muhammed Adnan on May 21st, 2024
@@ -10,7 +11,7 @@ import { projectItems } from '@/constants/workspace';
   Updated by: - Muhammed Adnan on May 24th, 2024 - Adjusted Padding and radius as needed
  */ 
 
-const ProjectList = () => {
+const ProjectList = ({ workspaceSlug }: { workspaceSlug: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
@@ -48,6 +49,7 @@ const ProjectList = () => {
           <Plus size={12} className="text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
         </div>
       </button>
+
       {isOpen && (
         <div className="absolute z-10 overflow-y-auto max-h-[45vh] w-full mt-1">
           {projects.map((project, index) => (
@@ -66,22 +68,41 @@ const ProjectList = () => {
                   <MoreHorizontal size={15} className="ml-2 text-slate-400" />
                 </div>
               </button>
-              {selectedProject === project && (
+
+               {selectedProject === project && (
                 <div className="pl-8">
-                  {projectItems.map((item, index) => (
-                    <button key={index} className="flex items-center w-full px-4 py-1 mb-1 text-[13px] text-gray-700 hover:bg-gray-100">
-                      <item.icon size={14}/>
-                      <span className="ml-2">{item.title}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+                {projectItems.map((item, index) => (
+                  <div key={index} className="mb-1">
+                    {item.title === "Timeline" ? (
+                      // Render a clickable link only for the Timeline item
+                      <Link
+                        href={`/workspaces/${workspaceSlug}/timeline`}
+                        className="flex items-center w-full px-4 py-1 text-[13px] text-gray-700 hover:bg-gray-100"
+                      >
+                        <item.icon size={14} />
+                        <span className="ml-2">{item.title}</span>
+                      </Link>
+                    ) : (
+                      // Render non-clickable items for everything else
+                      <button
+                        onClick={(e) => e.stopPropagation()} // Prevents parent click events
+                        className="flex items-center w-full px-4 py-1 text-[13px] text-gray-700 hover:bg-gray-100"
+                        disabled // Make the button non-functional
+                      >
+                        <item.icon size={14} />
+                        <span className="ml-2">{item.title}</span>
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+);
 };
 
 export default ProjectList;
