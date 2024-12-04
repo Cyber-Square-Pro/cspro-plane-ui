@@ -34,7 +34,7 @@ export const EmailVerificationForm: React.FC<Props> = observer((props) => {
     isSubmitting(true)
 
     return emailService.requestCode().then((response) => {
-      console.log(response?.statusCode);
+      
       if (response?.statusCode == 200) {
         isSubmitting(false)
         console.log("Verification Code: ", response?.code);

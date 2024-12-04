@@ -23,9 +23,9 @@ export const PROFILE_ACTION_LINKS = [
     Icon: CircleUser,
   },
   {
-    key: "change-password",
-    label: "Change password",
-    href: '/profile/change-password',
+    key: "security",
+    label: "security",
+    href: '/profile/security',
     Icon: KeyRound,
   },
   {

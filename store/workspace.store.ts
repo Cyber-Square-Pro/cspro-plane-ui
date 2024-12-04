@@ -79,7 +79,7 @@ constructor(_rootStore: RootStore) {
 
       return workspaceResponse;
     } catch (error) {
-      console.log("Failed to fetch user workspaces in workspace store", error);
+      
 
       runInAction(() => {
          

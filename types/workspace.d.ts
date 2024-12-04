@@ -21,9 +21,11 @@ export interface IWorkspace {
   }
 // Created by: Muhammed Adnan on May 23rd, 2024
 export interface IProjectItem {
+  href?: string;
   icon: LucideIcon; 
   title: string;
 };
+
 
 // Author: Muhammed Adnan on June 1st, 2024
 export interface ISidebarItem {
@@ -32,3 +34,10 @@ export interface ISidebarItem {
   label: string;
   href: string;
 }
+
+export interface IWSidebarItem {
+  key: string;
+  label: string;
+  href: string;
+}
+

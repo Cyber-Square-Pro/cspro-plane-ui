@@ -4,14 +4,13 @@ import { IUser, IUserSettings } from "@/types/user";
 
 export class UserService extends APIService {
     constructor() {
-      console.log('next url', API_BASE_URL
-      );
+      
       
       super(API_BASE_URL);
     }
 
     async updateUser(data: Partial<IUser>): Promise<any> {
-      console.log('in store22222', data)
+      
         return this.patch("/api/users/me/", data)
           .then((response) => response?.data)
           .catch((error) => {
@@ -32,7 +31,7 @@ export class UserService extends APIService {
           is_onboarded: true,
         })
           .then((response) => {
-             console.log('onboardrd')
+            
             return response?.data;
           })
           .catch((error) => {
