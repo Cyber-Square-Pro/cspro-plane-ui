@@ -3,19 +3,27 @@ import Link from 'next/link';
 import React from 'react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Dropdown } from '@nextui-org/react';
+import CustomDropdown from '@/components/custom-dropdown';
+import { dashboardDropdownItems } from '@/constants/dropdown-items';
 
 interface Props {
   title: string;
   description?: string;
   icon?: React.ReactNode;
+
 }
 
 export const DashboardIssueCard: React.FC<Props> = ((props) => {
   const { title, description, icon } = props;
   const [activeTab, setActiveTab] = useState('Pending');
+  const [selectRole, setSelectRole] = useState("");
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
+  };
+  const handleSelect = (selectedItem: string) => {
+    setSelectRole(selectedItem);
   };
 
   return (
@@ -26,7 +34,7 @@ export const DashboardIssueCard: React.FC<Props> = ((props) => {
             {title}
           </Link>
         </div>
-        <Button variant="outline">DROPDOWN</Button>
+       <CustomDropdown dropDownItems={dashboardDropdownItems} dropDownTitle='None' onSelect={handleSelect}/>
         <div className='relative w-min text-left font-normal flex-shrink-0'></div>
       </div>
       <div className='h-full flex flex-col'>
