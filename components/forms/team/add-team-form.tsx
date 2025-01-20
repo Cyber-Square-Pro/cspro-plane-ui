@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,23 +19,34 @@ const AddTeamForm: React.FC<Props> = (props) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<TAddTeamValidator>({
     resolver: zodResolver(AddTeamValidator),
   });
-  
+
   const { onFormSubmit } = props;
 
-  // Watch the values of the team name and description fields
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleFormSubmit = (data: ITeam) => {
+    onFormSubmit(data);
+    setIsSuccess(true); 
+    setTimeout(() => setIsSuccess(false), 3000); 
+  };
   const watchTeamName = watch('team_name');
   const watchTeamDescription = watch('team_description');
 
-  // Button is disabled if either team name or description is empty
   const isButtonDisabled = !watchTeamName || !watchTeamDescription;
-
   return (
     <div className="w-full max-w-lg mx-auto p-4">
       <div className="text-center mb-6">
         <FormHeading headingText="Create Your Team" />
         <FormDescription descriptionText="Build your team to manage projects efficiently." />
       </div>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
+      
+      {isSuccess && (
+        <div className="text-green-500 text-center mb-4">
+          Team added successfully!
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="py-2">
           <Label className="block mb-2">Team Name</Label>
           <Input
@@ -72,3 +82,4 @@ const AddTeamForm: React.FC<Props> = (props) => {
 };
 
 export default AddTeamForm;
+
