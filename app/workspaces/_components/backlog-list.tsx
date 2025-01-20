@@ -1,29 +1,27 @@
+
 "use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CreateSprint } from "./modals/quick-create-sprint";
 import { QuickBacklogCreateForm } from "@/components/forms/project/quick-backlog-create-form";
 
-/*
-  Author: Muhammed Adnan on June 10th, 2024
-  Purpose: Renders the BacklogsList component, which displays the list of backlogs and allows the 
-           quick creation of new sprints.
-  Props: None
-*/
-
 export const BacklogsList = () => {
   const [sprints, setSprints] = useState<number[]>([]);
+  const [isSprintModalOpen, setIsSprintModalOpen] = useState(false);
   const issues = ["issue 1", "issue 2", "issue 3", "issue 4", "issue 5"];
 
   const handleCreateSprint = () => {
     setSprints([...sprints, sprints.length + 1]);
+    setIsSprintModalOpen(true); // Open the input modal
   };
+
+  const handleCloseSprintModal = () => setIsSprintModalOpen(false);
 
   return (
     <div className="h-full w-full bg-zinc-50 flex flex-col">
       <div className="flex-1 overflow-x-scroll max-h-screen pb-20 w-full">
         {sprints.map((_, index) => (
-          <CreateSprint key={index} />
+          <CreateSprint key={index} isSprintModalOpen={isSprintModalOpen} onCloseSprintModal={handleCloseSprintModal} />
         ))}
         <div className="flex items-center text-[13px] text-zinc-600 font-bold justify-between pl-10 pr-3 pb-2">
           <span>Backlogs</span>
