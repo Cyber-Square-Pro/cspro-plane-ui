@@ -10,7 +10,7 @@ import Link from "next/link";
   Purpose: Renders a list of user projects with dropdown options for each project.
   Props: workspaceSlug (string)
   Updated by: - Muhammed Adnan on May 24th, 2024 - Adjusted Padding and radius as needed
-              - Navya Johnson on Jan 20th, 2025 - Fixed JSX mismatch error
+              - Navya Johnson on Jan 20th, 2025 - Fixed JSX mismatch error.
 */
 
 const ProjectList = ({ workspaceSlug }: { workspaceSlug: string }) => {
