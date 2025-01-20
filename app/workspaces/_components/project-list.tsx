@@ -89,7 +89,7 @@ const ProjectList = ({ workspaceSlug }: { workspaceSlug: string }) => {
                         </Link>
                       ) : (
                         <button
-                          onClick={() => router.push(item.href)}
+                          onClick={() => item.href && router.push(item.href)}
                           className="flex items-center w-full px-4 py-1 text-[13px] text-gray-700 hover:bg-gray-100"
                         >
                           <item.icon size={14} />
