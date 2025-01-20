@@ -50,6 +50,7 @@ export class CommandPaletteStore implements ICommandPaletteStore{
         
       };
 
+
       // Created by Nisha J. on Jun 19th, 2024 
       // function to toggle issue creation modal
       toggleCreateIssueModal = (value?: boolean) => {
@@ -60,5 +61,7 @@ export class CommandPaletteStore implements ICommandPaletteStore{
           this.isCreateIssueModalOpen = !this.isCreateIssueModalOpen;
         }
         console.log('value',   this.isCreateIssueModalOpen )
+
       };     
+
 }

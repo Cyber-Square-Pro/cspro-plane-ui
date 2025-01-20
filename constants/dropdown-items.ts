@@ -12,6 +12,16 @@ export const OrgSizeDropDownItems:string[] = [
     "250+"
 ]
 
+export const dashboardDropdownItems:string[] = [
+    "None", 
+    "Due today", 
+    "Due this week",
+    "Due this month",
+    "Due this year",
+    "Custom"
+]
+
+
 export const PriorityDropDownItems: string[] = [
     'Urgent',
     'High',
@@ -42,3 +52,4 @@ export const PriorityDropDownItems: string[] = [
     'Owner'
   ];
  
+

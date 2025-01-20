@@ -1,4 +1,4 @@
-import { Activity, CircleUser, KeyRound, Settings2 , Plus , UserPlus } from "lucide-react";
+import { Activity, CircleUser, KeyRound, Settings2 , Plus , UserPlus, Bell } from "lucide-react";
 
   // Author: Muhammed Adnan on June 2nd, 2024
 export const USER_ROLES = [
@@ -40,6 +40,12 @@ export const PROFILE_ACTION_LINKS = [
     href: '/profile/preferences/theme',
     Icon: Settings2,
   },
+  {
+  key: "notifications",
+  label: "Notifications",
+  href: '/profile/notifications',
+  Icon: Bell,
+},
 ];
 
 // Author: Muhammed Adnan on June 2nd, 2024
