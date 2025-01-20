@@ -24,6 +24,7 @@ export interface IProjectItem {
   href?: string;
   icon: LucideIcon; 
   title: string;
+  href: string;
 };
 
 

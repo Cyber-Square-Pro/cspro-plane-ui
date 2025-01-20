@@ -75,9 +75,8 @@ const WorkspaceLayout = ({ children, params }: WorkspaceLayoutProps) => {
             <ProjectList  workspaceSlug={workspaceSlug}/>
           </div>
         </nav>
-      </aside>-
+      </aside>
 
-     
       <div className="flex-1 flex flex-col overflow-hidden">
         <main>{children}</main>
       </div>
