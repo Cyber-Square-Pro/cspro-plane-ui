@@ -12,7 +12,7 @@ const Team = () => {
     try {
       console.log("Submitting data:", data);
       const response = await teamService.addTeam(data);
-      console.log("Response:", response?.message);
+      
     } catch (error) {
       console.error("An error occurred while adding the team:", error);
     }
