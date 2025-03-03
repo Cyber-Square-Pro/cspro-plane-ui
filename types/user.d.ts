@@ -72,4 +72,18 @@ export type TOnboardingSteps = {
       invites: number;
     };
   }
+
+
+  export interface ICurrentUserResponse extends IUser {
+    assigned_issues: number;
+    last_workspace_id: string | null;
+    workspace_invites: number;
+    workspace: {
+      fallback_workspace_id: string | null;
+      fallback_workspace_slug: string | null;
+      invites: number;
+      last_workspace_id: string | null;
+      last_workspace_slug: string | null;
+    };
+  }
   

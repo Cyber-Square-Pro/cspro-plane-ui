@@ -55,3 +55,16 @@ export const RESTRICTED_URLS = [
    
     },
   ]
+
+  export const NETWORK_CHOICES: { key: 0 | 2; label: string; icon: string }[] = [
+    {
+      key: 0,
+      label: "Private",
+      icon: "lock",
+    },
+    {
+      key: 2,
+      label: "Public",
+      icon: "public",
+    },
+  ];

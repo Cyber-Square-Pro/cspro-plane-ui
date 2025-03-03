@@ -61,14 +61,14 @@ export interface IProjectMemberLite {
   }
 
 export interface ICreateProjectForm {
-    name: string;
+    project_name: string;
     identifier: string;
     description: string;
-    emoji_and_icon: string;
+    // workspace: string;
+    // emojiAndIcon: string;
     network: number;
-    project_lead_member: IWorkspaceMember;
-    project_lead: string;
-    cover_image: string;
-    icon_prop: any;
-    emoji: string;
-  }
+    // project_lead_member: IWorkspaceMember;
+    // projectLead: string;
+    // coverImage: string;
+    // emoji: string;
+   }

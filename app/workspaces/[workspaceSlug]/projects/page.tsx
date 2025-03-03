@@ -41,21 +41,20 @@ const ProjectListPage = observer(() => {
         ]}
       />
 
-      <div className="flex flex-row">
+      <div className="flex flex-row gap-4">
         <ProjectListCard
+          backgroundImg="https://windows10spotlight.com/wp-content/uploads/2023/01/81a6e74c8adbf7f55406e8c4b80669d5.jpg"
           isStarred={true}
           projectDesc="Test project"
           projectName="Rifad Test"
-          identifier="TEST"
-        />
+          identifier="TEST" status="In Progress" lastUpdated="2 Days ago" dueDate="Oct, 2025"        />
 
         <ProjectListCard
           backgroundImg="https://windows10spotlight.com/wp-content/uploads/2023/01/81a6e74c8adbf7f55406e8c4b80669d5.jpg"
           isStarred={false}
           projectDesc="Test project 2"
           projectName="Rifad Test"
-          identifier="TESwT"
-        />
+          identifier="TESwT" status="Active" lastUpdated="1 day ago" dueDate="Sep 1, 2025"       />
       </div>
     </>
   );

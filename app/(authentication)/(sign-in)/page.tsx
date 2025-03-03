@@ -43,7 +43,10 @@ const SignInPage = () => {
         const workspaceSlug =
           userSettings?.workspace?.last_workspace_slug ||
           userSettings?.workspace?.fallback_workspace_slug;
-        if (workspaceSlug) router.push(`/workspaces/${workspaceSlug}`);
+        if (workspaceSlug) {
+          localStorage.setItem("currentWorksSpaceSlug", workspaceSlug);
+          router.push(`/workspaces/${workspaceSlug}`);
+        };
       });
     },
     [router]
