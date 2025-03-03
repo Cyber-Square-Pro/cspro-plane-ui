@@ -5,20 +5,25 @@ import { useMobxStore } from '@/store/store.provider';
 import ProjectCreateForm from '@/components/forms/account/project-create-form';
 import { ICreateProjectForm } from '@/types/project';
 import Image from 'next/image';
+import { ProjectService } from '@/services/project.service';
+import { Toast } from "@/lib/toast/toast";
+import { ToastContainer } from "react-toastify";
+
+
 
 /* 
   Updated by: Archana K on July 16th, 2024 - Added popovers for emoji picker and file uploader and created their corresponding buttons.
              
 */
 
+
+
 interface CreateProjectModalProps {
   openModal: () => void;
 }
 
 export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
-  const {
-    project: { createProject },
-  } = useMobxStore();
+ 
 
   const [backgroundImage, setBackgroundImage] = useState<string>(
     'https://i.pinimg.com/originals/13/d0/90/13d0903cbcd0e0205c5fe0a3546f59fd.jpg'
@@ -31,7 +36,9 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(true); // Added state for modal visibility
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const emojiPickerRef = useRef<HTMLDivElement | null>(null);
+  const [formData, setFormData] = useState<ICreateProjectForm | null>(null);
 
+  const projectService = new ProjectService();
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -57,24 +64,28 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
     setSelectedEmoji('😀');
   };
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data: ICreateProjectForm = {
-      name: formData.get('name') as string,
-      identifier: formData.get('identifier') as string,
-      description: formData.get('description') as string,
-      emoji_and_icon: selectedEmoji,
-      network: 0,
-      project_lead_member: undefined,
-      project_lead: '',
-      cover_image: '',
-      icon_prop: undefined,
-      emoji: ''
-    };
-    // return createProject(data); // Assuming createProject is expecting ICreateProjectForm type
-  };
+ 
+  
+  const handleFormSubmit = (data: ICreateProjectForm) => {
+    
+    const currentWorksSpaceSlug =  localStorage.getItem('currentWorksSpaceSlug') || ''
+    const payload = { ...data, currentWorksSpaceSlug};
+    setFormData(payload);
+    console.log('Received Data in Modal:',payload);
+    const toast = new Toast();
 
+    return projectService.createProject(currentWorksSpaceSlug, payload).then((response) => {
+     console.log(response)
+     if(response?.statusCode == 201) {
+      toast.showToast("success", response?.message);
+     }
+     else{
+      toast.showToast("error", response?.message);
+     }
+
+    });
+    
+  };
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -125,6 +136,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
 
   return (
     <div>
+      <ToastContainer />
       {isModalOpen && (
         <dialog className="border-3 left-0 top-0 w-full h-full bg-black bg-opacity-50 z-50 overflow-auto flex justify-center items-center open">
           <div className="bg-white m-auto p-4 w-[45%] h-[70%] rounded-md relative">
@@ -189,6 +201,8 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
                                 <Image
                                   alt="image"
                                   className="rounded-lg"
+                                  width={100}
+                                  height={200}
                                   src={backgroundImage}
                                   style={{ position: 'absolute', height: '100%', width: '100%', inset: '0px', objectFit: 'cover', color: 'transparent' }}
                                 />
@@ -226,12 +240,12 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
                   </div>
                 )}
               </div>
-              <form onSubmit={onSubmit} className="flex flex-col h-full w-full space-y-4">
-                <ProjectCreateForm />
+              <div  className="flex flex-col h-full w-full space-y-4">
+                <ProjectCreateForm onSubmit={handleFormSubmit}/>
                 <div className="flex justify-end space-x-4">
                   
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </dialog>
