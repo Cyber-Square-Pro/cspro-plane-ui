@@ -36,7 +36,7 @@ const ProjectListPage = observer(() => {
         // Option list including the Add Project button
         optionList={[
           <Button key="addProjectBtn" className="h-[30px] text-[12px]" onClick={handleAddProjectClick}>
-            Add Project
+            Add Projects
           </Button>,
         ]}
       />
