@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { ProjectService } from '@/services/project.service';
 import { Toast } from "@/lib/toast/toast";
 import { ToastContainer } from "react-toastify";
+import { comma } from 'postcss/lib/list';
 
 
 
@@ -26,7 +27,7 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
  
 
   const [backgroundImage, setBackgroundImage] = useState<string>(
-    'https://i.pinimg.com/originals/13/d0/90/13d0903cbcd0e0205c5fe0a3546f59fd.jpg'
+    'https://th.bing.com/th/id/OIP.6Ckm4MGXRjZgWQyRkjDDPgHaEK?rs=1&pid=ImgDetMain'
   );
   const [isPopoverVisible, setPopoverVisible] = useState<boolean>(false);
   const [isUploading, setUploading] = useState<boolean>(false);
@@ -37,8 +38,9 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const emojiPickerRef = useRef<HTMLDivElement | null>(null);
   const [formData, setFormData] = useState<ICreateProjectForm | null>(null);
-
+  const { project } = useMobxStore();
   const projectService = new ProjectService();
+  const [selectedFile, setSelectedFile] = useState<File>();
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -55,8 +57,10 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
     };
   }, []);
 
+
+  
   const resetModalState = () => {
-    setBackgroundImage('https://i.pinimg.com/originals/13/d0/90/13d0903cbcd0e0205c5fe0a3546f59fd.jpg');
+    setBackgroundImage('https://th.bing.com/th/id/OIP.6Ckm4MGXRjZgWQyRkjDDPgHaEK?rs=1&pid=ImgDetMain');
     setPopoverVisible(false);
     setUploading(false);
     setButtonEnabled(false);
@@ -66,22 +70,27 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
 
  
   
-  const handleFormSubmit = (data: ICreateProjectForm) => {
+  const handleFormSubmit = async (data: ICreateProjectForm) => {
     
     const currentWorksSpaceSlug =  localStorage.getItem('currentWorksSpaceSlug') || ''
-    const payload = { ...data, currentWorksSpaceSlug};
+    const payload = { ...data, currentWorksSpaceSlug, cover_image: selectedFile};
     setFormData(payload);
     console.log('Received Data in Modal:',payload);
     const toast = new Toast();
 
+
+    await project.createProject(currentWorksSpaceSlug, payload).then((response) => {
+      console.log('{{{{{{{{{{{{{{{{{{{{{{{{{{',response)
+      if(response?.statusCode == 201) {
+        toast.showToast("success", response?.message);
+       }
+       else{
+        toast.showToast("error", response?.message);
+       }
+    });
     return projectService.createProject(currentWorksSpaceSlug, payload).then((response) => {
      console.log(response)
-     if(response?.statusCode == 201) {
-      toast.showToast("success", response?.message);
-     }
-     else{
-      toast.showToast("error", response?.message);
-     }
+     
 
     });
     
@@ -89,11 +98,12 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setSelectedFile(file); // Set the selected file state
       const reader = new FileReader();
       reader.onloadend = () => {
         if (reader.result) {
           setBackgroundImage(reader.result as string);
-          setButtonEnabled(true); // Enable the button when the image is changed
+          setButtonEnabled(true); // Enable the button when the image is selected
         }
       };
       reader.readAsDataURL(file);
@@ -115,6 +125,26 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
   };
 
   const handleUploadAndSave = async () => {
+    console.log('Uploading and Saving...');
+
+    console.log('Uploading and Saving...');
+
+    if (selectedFile && formData) { 
+      const uploadData = new FormData();
+
+      // Append all existing form data, but skip the file if it exists already in the state
+      if (formData) {
+        Object.entries(formData).forEach(([key, value]) => {
+          if (key !== 'cover_image' && value !== null && value !== undefined) {
+            uploadData.append(key, value as string); // Append each field to FormData
+          }
+        });
+      }
+  
+      // Append the file (ensure it’s the correct key 'file' as expected by the server)
+      uploadData.append('cover_image', selectedFile);
+  
+    }
     setUploading(true);
     // Simulate image upload with a timeout (replace this with actual upload logic)
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -198,17 +228,18 @@ export const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ }) => {
                                 >
                                   Edit
                                 </button>
-                                <Image
+                                {/* <Image
                                   alt="image"
                                   className="rounded-lg"
                                   width={100}
                                   height={200}
                                   src={backgroundImage}
                                   style={{ position: 'absolute', height: '100%', width: '100%', inset: '0px', objectFit: 'cover', color: 'transparent' }}
-                                />
+                                /> */}
                                 <input
                                   ref={fileInputRef}
                                   type="file"
+                                  name='cover_image'
                                   accept="image/*,.png,.jpg,.jpeg,.svg,.webp"
                                   onChange={handleImageChange}
                                   style={{ display: 'none' }}

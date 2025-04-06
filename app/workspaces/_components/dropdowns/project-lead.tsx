@@ -36,6 +36,7 @@ export const ProjectLeadDropdown: React.FC<Props> = (props) => {
           <DropdownMenuContent side="bottom" align="start" className="w-62 p-0">
             {selectedType.map((type) => (
               <DropdownMenuRadioItem
+              key={type}
                 onSelect={() => handleSelectItem(type)}
                 className="flex items-center p-2 pl-4 hover:bg-gray-100"
                 value={type}

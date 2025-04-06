@@ -15,7 +15,10 @@ export class ProjectService extends APIService {
         data: Partial<IProject>,
     ): Promise<any> {
 
-        return this.post(`api/workspace/${workspaceSlug}/projects/`, data)
+        console.log('(((((((((((((((((', data)
+        return this.post(`api/workspace/${workspaceSlug}/projects/`, data,{headers: {
+            "Content-Type": "multipart/form-data", // Let the browser set this automatically
+        },})
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response;
@@ -26,7 +29,7 @@ export class ProjectService extends APIService {
     async fetchProjects(
         slug: string,
     ): Promise<any> {
-        return this.post(`api/projects/${slug}`)
+        return this.get(`api/workspace/${slug}/projects/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response;
