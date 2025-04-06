@@ -10,9 +10,13 @@ import ProfilePopover from "../_components/profile-popover";
 import { UserWrapper } from "./wrapper/user-wrapper";
 import { useState } from "react";
 import { useMobxStore } from "@/store/store.provider";
+// import { useEffect } from "react";
+import { ProjectStore } from "../../../store/project.store";
 import { observer } from "mobx-react-lite";
 import { SidebarTypes } from "@/constants/sidebarx";
-
+import { useParams } from 'next/navigation'
+import { ProjectService } from '@/services/project.service'
+import React, { useEffect } from 'react'
 
 /*
   Author: Reshma on April 21st, 2024
@@ -39,12 +43,57 @@ interface WorkspaceLayoutProps {
 }
 
 const WorkspaceLayout = ({ children, params }: WorkspaceLayoutProps) => {
-  const { workspaceSlug } = params;
+
   const [selectedItem, setSelectedItem] = useState("");
 
   const handleItemClick = (label: string) => {
     setSelectedItem(label);
   };
+
+  const { workspaceSlug } = useParams<{ workspaceSlug: string }>();
+  console.log(workspaceSlug,'workspaceSlug....')
+  const projectService = new ProjectService();
+  const projectList: any[] = [];
+  // useEffect(() => {
+  //   if (workspaceSlug) {
+  //     // Make API call when the page loads
+  //     const fetchProjects = async () => {
+
+  //       return projectService.fetchProjects(workspaceSlug).then((response) => {
+  //         const statusCode = response.statusCode;
+  //         console.log(response,'response.data....')
+  //         if(statusCode === 200){
+            
+  //           projectList.push(response.projects)
+  //           console.log(projectList,'projectList....')
+  //         }
+  //       }).catch((error) => {
+  //         console.log(error,'error....')
+  //       });
+  //       // setLoading(true)
+        
+  //     }
+
+  //     fetchProjects()
+  //   }
+  // }, [workspaceSlug])
+ const {
+    project:{fetchProjects},
+  } = useMobxStore();
+
+  useEffect(() => {
+    const fetchProjectData = async () => {
+      try {
+        const fetchedProjects = await fetchProjects(workspaceSlug);
+        console.log(fetchedProjects,'feeeetch')
+        // setProjects(fetchedProjects); // Assuming fetchProjects returns an array of project names or objects
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjectData();
+  }, [workspaceSlug, fetchProjects]);
 
   return (
     <UserWrapper>
@@ -67,12 +116,12 @@ const WorkspaceLayout = ({ children, params }: WorkspaceLayoutProps) => {
             </button>
           </div>
           <div className="w-full cursor-pointer mt-3">
-            <SideBar isOnboarded={true} workspaceSlug={workspaceSlug} type={SidebarTypes.ONBOARDING}/>
+            <SideBar isOnboarded={true} workspaceSlug={workspaceSlug}  type={SidebarTypes.ONBOARDING}/>
              
           </div>
 
           <div className="mt-4 h-full">
-            <ProjectList  workspaceSlug={workspaceSlug}/>
+            <ProjectList  workspaceSlug={workspaceSlug} />
           </div>
         </nav>
       </aside>

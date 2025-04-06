@@ -10,10 +10,11 @@ type Props = {
   isOnboarded: boolean;
   type: SidebarType;
 };
+  
 const SideBar: FC<Props> = (props) => {
   
   const { workspaceSlug, isOnboarded ,type } = props;
-  
+   
   return (
     <>
       <SidebarRoutes itemLink={workspaceSlug} isDisabled = {!isOnboarded} type={type}/>
