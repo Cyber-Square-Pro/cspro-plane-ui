@@ -1,76 +1,236 @@
 "use client";
-import React, { useState } from "react";
-import { ChevronDown, CircleUserRound } from "lucide-react";
+
+import { useEffect, useState } from "react";
+import { Camera, UserRound } from "lucide-react";
 import ProfileSettingsForm from "@/components/forms/settings/profile-settings-form";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { useForm, Controller } from "react-hook-form";
 
-/*
-  Author: Muhammed Adnan on June 2nd, 2024
-  Purpose: Displays the profile settings page 
-*/
+import { Spinner } from "@/components/spinner";
+import { Toast } from "@/lib/toast/toast";
+import { ToastContainer } from "react-toastify";
+import { IProfile, IUser } from "@/types/user";
+import { ProfileService } from "@/services/profile.service";
 
-const ProfileSettings = () => {
-  const [isDeactivateSectionOpen, setIsDeactivateSectionOpen] = useState(false);
-  const toggleDeactivateSection = () => {
-    setIsDeactivateSectionOpen(!isDeactivateSectionOpen);
+export default function ProfileSettings() {
+  const [coverImage, setCoverImage] = useState<string | null>(null);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [fullName, setFullName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [userProfile, setUserProfile] = useState<IProfile | null>(null);
+  const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const {
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<IUser>({
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      display_name: "",
+      user_timezone: "",
+      role: "",
+    },
+  });
+  const profileService = new ProfileService();
+  const toast = new Toast();
+  const handleFormSubmit = async (data: IProfile) => {
+    const formData = new FormData();
+    formData.append("first_name", data.first_name);
+    formData.append("last_name", data.last_name);
+    formData.append("email", data.email);
+    formData.append("user_timezone", data.user_timezone);
+    formData.append("role", data.role);
+    if (data.cover_image) {
+      formData.append("cover_image", data.cover_image);
+    }
+    console.log(data, "Form data.................................");
+    if (coverImageFile) {
+      formData.append("cover_image", coverImageFile);
+    }
+
+    profileService.updateUserProfile(formData).then((res) => {
+      console.log(res, "Profile updated successfully");
+      res?.statusCode == 200
+        ? toast.showToast("success", res?.message)
+        : toast.showToast("error", res?.message);
+    });
   };
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      setLoading(true);
+      try {
+        const res = await profileService.fetchUserProfile();
+        console.log(res.data.cover_image, "from page");
+
+        setFullName(res.data.first_name + " " + res.data.last_name);
+        setEmail(res.data.email);
+        if (res.data.cover_image) {
+          const coverImagePath = `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}${res.data.cover_image}`;
+          setCoverImage(coverImagePath);
+        }
+        reset(res.data);
+        setUserProfile(res.data);
+      } catch (error) {
+        console.error("Failed to fetch profile", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [reset]);
+
   return (
-    <div className="flex justify-center items-center w-full h-full">
-      <div className="flex w-[790px] h-full flex-col space-y-6 px-10 pt-9 pb-3 overflow-y-auto max-h-[calc(100vh-3.5rem)]">
-          <div className="relative h-100 w-full ">
-            <Image
-              src={"https://images.unsplash.com/photo-1506383796573-caf02b4a79ab"}
-              className="h-[180px] w-full rounded-lg object-cover"
-              alt={"Cover image"}
-              width={300}
-              height={150}
-              unoptimized
-            />
-              <div className="absolute -bottom-6 left-8 flex h-16 w-16 items-center bg-blue-50 justify-center rounded-lg">
-                <button>
-                  <div className="h-16 w-16 rounded-md bg-gray-200 p-2">
-                    <CircleUserRound className="h-full w-full text-gray-700"/>
-                  </div>
-                </button>
-              </div>
-            <div className="absolute bottom-3 right-3 flex">
-              <button className="h-[25px] p-1 bg-white rounded-sm text-black text-xs">Change Cover</button>
-            </div>
-          </div>
-
-          <div className="flex flex-col px-8">
-            <span className="font-bold mt-3">First name Last name</span>
-            <span className="text-sm tracking-tight">user@email.com</span>
-          </div>
-        <ProfileSettingsForm />
-        <div className="border-t px-8">
-          <button
-            className="flex w-full items-center justify-between py-4"
-            onClick={toggleDeactivateSection}
-          >
-            <span className="tracking-tight">Deactivate account</span>
-            <ChevronDown className={`h-5 w-5 transition-all ${isDeactivateSectionOpen ? "rotate-180" : ""}`} />
-          </button>
-          {isDeactivateSectionOpen && (
-            <div className="flex flex-col gap-8 transition duration-100 ease-out">
-              <span className="text-sm tracking-tight">
-                The danger zone of the profile page is a critical area that requires careful consideration and
-                attention. When deactivating an account, all of the data and resources within that account
-                will be permanently removed and cannot be recovered.
-              </span>
-              <div>
-                <Button className="bg-red-500 hover:bg-red-600 h-[30px] rounded-sm">
-                  Deactivate account
-                </Button>
-              </div>
-            </div>
-          )}
+    <>
+         
+      {loading ? (
+        <div className="flex justify-center items-center h-full">
+           
+          <Spinner size="large" />
         </div>
-      </div>
-    </div>
-  );
-};
+      ) : (
+        <>
+        <ToastContainer />
+          <div className="bg-white min-h-screen w-full px-6 py-8 font-inter">
+            <div className="rounded-2xl shadow border border-gray-200 overflow-hidden">
+              
+              <div className="relative h-40">
+                <img
+                  src={coverImage || "/images/image8.avif"}
+                  alt="Cover"
+                  className="w-full h-full object-cover"
+                />
+                <label className="absolute bottom-3 right-4 bg-white text-sm py-1 px-3 rounded-md shadow cursor-pointer flex items-center gap-2">
+                  <Camera size={16} /> Change Cover
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files[0]) {
+                        setCoverImage(URL.createObjectURL(e.target.files[0]));
+                        setCoverImageFile(e.target.files[0]);
+                      }
+                    }}
+                  />
+                </label>
+              </div>
 
-export default ProfileSettings;
+            
+              <div className="flex items-center space-x-4 px-6 py-6">
+                <div className="relative group w-16 h-16">
+                  <div className="w-16 h-16 rounded-md bg-gray-100 flex items-center justify-center overflow-hidden">
+                    {profileImage ? (
+                      <img
+                        src={profileImage}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <UserRound className="w-8 h-8 text-gray-500" />
+                    )}
+                  </div>
+                  <label className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 cursor-pointer flex items-center justify-center rounded-md transition-opacity">
+                    <Camera className="text-white w-4 h-4" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          setProfileImage(
+                            URL.createObjectURL(e.target.files[0])
+                          );
+                        }
+                      }}
+                    />
+                  </label>
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {fullName}
+                  </h2>
+                  <p className="text-sm text-gray-600">{email}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <ProfileSettingsForm
+                userProfile={userProfile}
+                onSubmit={handleFormSubmit}
+              />
+            </div>
+          </div>
+        </>
+      )}
+    </>
+
+    // <div className="bg-white min-h-screen w-full px-6 py-8 font-inter">
+    //   <div className="rounded-2xl shadow border border-gray-200 overflow-hidden">
+
+    //     {/* Cover Image */}
+    //     <div className="relative h-40">
+    //       <img
+    //         src={coverImage || "/images/image8.avif"}
+    //         alt="Cover"
+    //         className="w-full h-full object-cover"
+    //       />
+    //       <label className="absolute bottom-3 right-4 bg-white text-sm py-1 px-3 rounded-md shadow cursor-pointer flex items-center gap-2">
+    //         <Camera size={16} /> Change Cover
+    //         <input
+    //           type="file"
+    //           accept="image/*"
+    //           className="hidden"
+    //           onChange={(e) => {
+    //             if (e.target.files && e.target.files[0]) {
+    //               setCoverImage(URL.createObjectURL(e.target.files[0]));
+    //               setCoverImageFile(e.target.files[0]);
+
+    //             }
+    //           }}
+    //         />
+    //       </label>
+    //     </div>
+
+    //     {/* Profile Image */}
+    //     <div className="flex items-center space-x-4 px-6 py-6">
+    //       <div className="relative group w-16 h-16">
+    //         <div className="w-16 h-16 rounded-md bg-gray-100 flex items-center justify-center overflow-hidden">
+    //           {profileImage ? (
+    //             <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
+    //           ) : (
+    //             <UserRound className="w-8 h-8 text-gray-500" />
+    //           )}
+    //         </div>
+    //         <label className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 cursor-pointer flex items-center justify-center rounded-md transition-opacity">
+    //           <Camera className="text-white w-4 h-4" />
+    //           <input
+    //             type="file"
+    //             accept="image/*"
+    //             className="hidden"
+    //             onChange={(e) => {
+    //               if (e.target.files && e.target.files[0]) {
+    //                 setProfileImage(URL.createObjectURL(e.target.files[0]));
+    //               }
+    //             }}
+    //           />
+    //         </label>
+    //       </div>
+    //       <div>
+    //         <h2 className="text-xl font-semibold text-gray-900">{fullName}</h2>
+    //         <p className="text-sm text-gray-600">{email}</p>
+    //       </div>
+    //     </div>
+    //   </div>
+
+    //   <div className="mt-12">
+    //     <ProfileSettingsForm  userProfile={userProfile} onSubmit={handleFormSubmit} />
+    //   </div>
+    // </div>
+  );
+}

@@ -49,6 +49,9 @@ export type TOnboardingSteps = {
   export interface IProfile {
     first_name: string;
     last_name: string;
+    email: string;
+    cover_image: string;
+    user_timezone: string;
     role: string;
   }
   export interface IVerificationCode{

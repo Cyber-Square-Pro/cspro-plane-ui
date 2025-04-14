@@ -4,6 +4,7 @@ import { ChevronLeft, LogOut, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import Sidebar from "@/components/sidebar/profile-settings-sidebar/sidebar";
 import { PROFILE_ACTION_LINKS, WORKSPACE_ACTION_LINKS } from "@/constants/profile";
+import "react-toastify/dist/ReactToastify.css";
 
 /*
   Author: Muhammed Adnan on June 2nd, 2024
