@@ -46,7 +46,7 @@ export default function ProfileSettings() {
     if (data.cover_image) {
       formData.append("cover_image", data.cover_image);
     }
-    console.log(data, "Form data.................................");
+    
     if (coverImageFile) {
       formData.append("cover_image", coverImageFile);
     }

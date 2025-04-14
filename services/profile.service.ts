@@ -24,6 +24,15 @@ export class ProfileService extends APIService {
             throw error?.response;
         });
     }
+
+       async updateUserPassword(data:any): Promise<any> {
+        console.log(data, "data from service")
+        return this.put("api/user/profile/change-password/", data)
+        .then((response) => response?.data)
+        .catch((error) => {
+            throw error?.response;
+        });
+    }
     
     
 }

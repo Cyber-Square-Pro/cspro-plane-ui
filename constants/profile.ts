@@ -18,7 +18,7 @@ export const PROFILE_ACTION_LINKS = [
   {
     key: "change-password",
     label: "Change password",
-    href: '/profile/change-password',
+    href: '/profile/security',
     Icon: KeyRound,
   },
   {
