@@ -8,14 +8,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@/components/ui/label";
 import { FormLabel } from "@/components/form-elements/form-label";
-import { IProfile, IVerificationCode } from "@/types/user";
+import { ICreateProfile } from "@/types/user";
 import {
   ProfileValidator,
   TProfileValidator,
 } from "@/lib/validators/account/profile.validator";
 
 interface Props {
-  onSubmit: (formData: IProfile) => Promise<void>;
+  onSubmit: (formData: Partial<ICreateProfile>) => Promise<void>;
   isSubmitting: boolean;
 }
 

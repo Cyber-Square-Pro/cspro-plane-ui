@@ -34,6 +34,16 @@ export class WorkspaceService extends APIService {
             throw error?.response?.data;
           });
       }
+
+      
+      async updateWorkspace(data: any): Promise<any> {
+        console.log(data, "data from service")
+        return this.put(`/api/users/me/workspaces/`, data)
+          .then((response) => response?.data)
+          .catch((error) => {
+            throw error?.response?.data;
+          });
+      }
  
     //   fetchCurrentUserSettings = async () => {
     //     try {

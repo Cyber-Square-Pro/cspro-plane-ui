@@ -53,7 +53,16 @@ export type TOnboardingSteps = {
     cover_image: string;
     user_timezone: string;
     role: string;
-  }
+  } 
+
+  export interface ICreateProfile {
+    first_name: string;
+    last_name: string;
+    email: string;
+    cover_image: string;
+    user_timezone: string;
+    role: string;
+  } 
   export interface IVerificationCode{
     code: string
   }

@@ -70,26 +70,8 @@ const SignInPage = () => {
         }
       });
 
-      // const response = await fetch("api/auth/sign-in", {
-      //   method: "POST",
-      //   body: JSON.stringify(formData),
-      // });
-
-      // const responseData = await response.json();
-
-      // if (responseData.statusCode == 200) {
-      //   console.log('success')
-      //   setLoading(true);
-      //   mutateUserInfo();
-      //   setTimeout(() => {
-      //     router.push("/onboarding");
-      //   }, 1000);
-      // }
-     
-      // else {
-      //   setLoading(false);
-      //   toast.showToast("error", responseData.message);
-      // }
+      
+      
     };
 
   return (

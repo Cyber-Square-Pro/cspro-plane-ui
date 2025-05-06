@@ -19,6 +19,15 @@ export interface IWorkspace {
     organization_size: string;
     total_issues: number;
   }
+
+  export interface IUpdateWorkspace {
+    id: string;
+    name: string;
+    logo: string | null;
+    slug: string;
+    organization_size: any;
+  }
+
 // Created by: Muhammed Adnan on May 23rd, 2024
 export interface IProjectItem {
   icon: LucideIcon; 

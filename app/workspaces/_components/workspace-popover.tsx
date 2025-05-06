@@ -13,6 +13,7 @@ import { AuthService } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { useMobxStore } from "@/store/store.provider";
 import { IWorkspace } from "@/types/workspace";
+import Link from "next/link";
 
 /* 
 Author:  SreethuEA on May 23, 2024
@@ -38,6 +39,8 @@ const WorkspacePopover: React.FC = () => {
     : "";
   const email = currentUser?.email;
 
+  const currentWorkspace = workspaces?.[0]?.name.replace(/\s+/g, "-") || "";
+  console.log(currentWorkspace, "currentWorkspacessssssssssssss");
   //created by Sreethu -  Function to handle user logout
   const handleLogout = async () => {
     try {
@@ -109,16 +112,16 @@ const WorkspacePopover: React.FC = () => {
             <div className="flex items-center">
               <CircleUserRound />
               <span className="ml-2 text-sm max-w-prose text-slate-600">
-                View profile
+                View profiles
               </span>
             </div>
             <br />
-            <div className="flex items-center">
+            <Link  href={`/workspaces/${currentWorkspace}/settings/`} className="flex items-center">
               <Settings />
               <span className="ml-2 text-sm max-w-prose text-slate-600">
                 Settings
               </span>
-            </div>
+            </Link>
             <br />
             <hr />
             <div className="flex items-center">
@@ -129,7 +132,6 @@ const WorkspacePopover: React.FC = () => {
                 <LogOut className="mr-2" color="red" />
                 <span className="text-sm max-w-prose">Sign Out</span>
               </button>
-               
             </div>
           </div>
         </PopoverContent>

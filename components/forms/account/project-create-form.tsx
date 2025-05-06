@@ -1,15 +1,16 @@
 import { ProjectTypeDropdown } from "@/app/workspaces/_components/dropdowns/project-type";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { CreateProjectValidator, TCreateProjectValidator } from "@/lib/validators/account/create-project.validator";
-import { ICreateProjectForm } from "@/types/project";
+import { CreateProjectValidator, TCreateProjectValidator } from "@/lib/validators/project/create-project.validator";
+import { ICreateProject } from "@/types/project";
+// import { ICreateProjectForm } from "@/types/project";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 
 interface Props {
-    onFormSubmit?: (formData: ICreateProjectForm) => void;
+    onFormSubmit?: (formData: ICreateProject) => void;
 }
 
 const ProjectCreateForm: React.FC<Props> = (props) => {

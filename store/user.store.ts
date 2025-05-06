@@ -129,6 +129,7 @@ export class UserStore implements IUserStore {
   fetchCurrentUserSettings = async () => {
     try {
       const response = await this.userService.currentUserSettings();
+      console.log('user *************************************', response)
       if (response) {
         runInAction(() => {
           this.currentUserSettings = response;

@@ -1,3 +1,4 @@
+'use client';
 import CustomDropdown from "@/components/custom-dropdown";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

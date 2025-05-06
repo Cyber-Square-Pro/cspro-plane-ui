@@ -1,7 +1,7 @@
 import { ProfileForm } from "@/components/forms/account/profile-form";
 import { User } from "lucide-react";
 import React, { useState } from "react";
-import { IProfile, IUser, TOnboardingSteps } from "@/types/user";
+import { ICreateProfile, IProfile, IUser, TOnboardingSteps } from "@/types/user";
 import { observer } from "mobx-react-lite";
 import { Toast } from "@/lib/toast/toast";
 import { ToastContainer } from "react-toastify";
@@ -38,7 +38,7 @@ export const Profile: React.FC<Props> = observer((props) => {
 
 
    */
-  const submitForm = async (formData: IProfile) => {
+  const submitForm = async (formData:Partial<ICreateProfile>) => {
     
     const payload: Partial<IUser> = {
       ...formData,

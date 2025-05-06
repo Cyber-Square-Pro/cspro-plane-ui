@@ -27,3 +27,12 @@ export const RESTRICTED_URLS = [
     { icon: FileText, title: "Pages" },
     { icon: Settings, title: "Settings" }
   ];
+
+  
+
+  export const ORG_SIZE = [
+    { value:"1 - 10", label: "1 - 10" },
+    { value:"10 - 49", label: "10 - 49" },
+    { value:"50 - 249", label: "50 - 249" },
+    { value:"250+", label: "250+" },
+  ];

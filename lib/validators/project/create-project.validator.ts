@@ -2,8 +2,10 @@ import { z } from 'zod';
 
 export const CreateProjectValidator = z.object({
 
-    projectName: z.string().min(1),
+    name: z.string().min(1),
+    identifier: z.string().min(1),
     description: z.string().min(1),
+    
      
     });
  

@@ -60,15 +60,10 @@ export interface IProjectMemberLite {
     member_id: string;
   }
 
-export interface ICreateProjectForm {
+export interface ICreateProject {
     name: string;
     identifier: string;
     description: string;
-    emoji_and_icon: string;
-    network: number;
-    project_lead_member: IWorkspaceMember;
-    project_lead: string;
-    cover_image: string;
-    icon_prop: any;
-    emoji: string;
+    network?: number;
+    cover_image?: string;
   }
