@@ -64,6 +64,6 @@ export interface ICreateProject {
     name: string;
     identifier: string;
     description: string;
-    network?: number;
-    cover_image?: string;
+    // network?: string;
+    // cover_image?: File;
   }

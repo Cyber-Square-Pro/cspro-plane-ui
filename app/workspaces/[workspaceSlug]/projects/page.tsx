@@ -7,6 +7,8 @@ import { useMobxStore } from "@/store/store.provider";
 import { CreateProjectModal } from "../../_components/modals/create-project-modal";
 import { observer } from "mobx-react-lite";
 import { ICreateProject } from "@/types/project";
+import { useEffect } from "react";
+import { useParams } from 'next/navigation';
 
 const ProjectCard: React.FC<Project> = ({
   title,
@@ -38,6 +40,24 @@ const ProjectCard: React.FC<Project> = ({
 };
 
 const ProjectListPage = observer(() => {
+
+
+   const {  project:{projects,fetchProjects}, workspace:{} } =  useMobxStore();
+  console.log('projects', projects)
+  
+    const params = useParams();
+  
+    // Access the workspaceSlug
+    const workspaceSlug = params.workspaceSlug as string;
+  
+  useEffect(() => {
+    if (workspaceSlug) {
+      fetchProjects(workspaceSlug);
+    }
+  }, [workspaceSlug]);
+
+
+
   const { commandPalette: commandPaletteStore } = useMobxStore();
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 6;
@@ -94,6 +114,9 @@ const ProjectListPage = observer(() => {
             {paginatedProjects.map((project, index) => (
               <ProjectCard key={index} {...project} />
             ))}
+             {/* {projects.map((project: Project, index: number) => (
+               <ProjectCard key={index} {...project} />
+             ))} */}
           </div>
 
           <div className="border-t border-gray-200 px-4 py-3 flex items-center justify-between">

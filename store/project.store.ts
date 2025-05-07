@@ -7,6 +7,7 @@ import {
   runInAction,
   observable
 } from "mobx";
+import { ProjectService } from "@/services/project.service";
 
 export interface IProjectStore {
 
@@ -17,14 +18,17 @@ export interface IProjectStore {
 
     //actions
     createProject: (workspaceSlug: string, data: any) => Promise<any>;
+    
+    fetchProjects: (workspaceSlug: string) => Promise<any>;
+
 }
 
 export class ProjectStore implements IProjectStore {
 
     projects: { [workspaceSlug: string]: IProject[] } = {};
-    // workspaceProjects: IProject[] | null = null;
+    
     rootStore;
-
+    projectService;
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
             projects: observable.ref,
@@ -34,6 +38,7 @@ export class ProjectStore implements IProjectStore {
     
         })
         this.rootStore = _rootStore;
+        this.projectService = new  ProjectService();
          
       }
 
@@ -50,7 +55,27 @@ export class ProjectStore implements IProjectStore {
     
       createProject = async (workspaceSlug: string, data: any) => {
         
+        console.log('creating project', data, workspaceSlug)
+
+        const response = await this.projectService.createProject(workspaceSlug, data);
+        console.log('response from store@@@@@@@@@@@@@@@@@@@@@@', response)
+        if (response) {
+          runInAction(() => {
+            if (!this.projects[workspaceSlug]) {
+              this.projects[workspaceSlug] = [];
+            }
+            // this.projects[workspaceSlug].push(response);
+          });
+        }
+        return response;
       }
 
+
+ fetchProjects = async (workspaceSlug: string) => {
+  const response = await this.projectService.fetchProjects(workspaceSlug);
+  runInAction(() => {
+    this.projects[workspaceSlug] = response || [];
+  });
+}
       
 }

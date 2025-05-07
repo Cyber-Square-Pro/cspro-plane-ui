@@ -10,7 +10,10 @@ import { Button } from "@/components/ui/button";
 import { useRef, useEffect, useState } from "react";
 import { CreateProjectValidator, TCreateProjectValidator } from "@/lib/validators/project/create-project.validator";
 import { ProjectService } from "@/services/project.service";
- 
+import { useParams } from 'next/navigation';
+import { Toast } from "@/lib/toast/toast";
+import { ToastContainer } from "react-toastify";
+
 export const CreateProjectModal = () => {
   const {
     project: { createProject },
@@ -20,7 +23,7 @@ export const CreateProjectModal = () => {
   const {
     register,
     handleSubmit,
-
+    setValue,
     formState: { isValid, errors },
   } = useForm<TCreateProjectValidator>({
     resolver: zodResolver(CreateProjectValidator),
@@ -63,6 +66,14 @@ export const CreateProjectModal = () => {
     }
   };
 
+
+  const params = useParams();
+
+  // Access the workspaceSlug
+  const workspaceSlug = params.workspaceSlug as string;
+
+console.log("workspaceSluggggggggggggggg", workspaceSlug);
+
   // Function to handle online image selection
   const handleOnlineImageSelect = () => {
     // TODO: Implement online image selection logic
@@ -75,6 +86,9 @@ export const CreateProjectModal = () => {
   const triggerImageUpload = () => {
     setIsCoverDropdownOpen(!isCoverDropdownOpen);
   };
+
+    const { commandPalette: commandPaletteStore } = useMobxStore();
+  
 
   const toggleLeadDropdown = () => {
     setIsLeadDropdownOpen(!isLeadDropdownOpen);
@@ -90,35 +104,53 @@ export const CreateProjectModal = () => {
     member.name.toLowerCase().includes(leadSearchQuery.toLowerCase())
   );
 
-  const {
-    project: { workspaceProjects,createProject: addNewProject},
+
+  // const {
+  //   project: { workspaceProjects,createProject: addNewProject},
     
-  } = useMobxStore();
+  // } = useMobxStore();
+
+  const toast = new Toast()
 
   const projectService = new ProjectService();
    
 
     const handleFormSubmit = async (data: ICreateProject) => {
+ 
+      console.log("Form submitted with data:", data);
       const formData = new FormData();
       if(imageFile){
         formData.append("cover_image", imageFile);
       }
     
-    formData.append("name", data.name);
+    formData.append("project_name", data.name);
     formData.append("identifier", data.identifier);
-    formData.append("first_name", data.name);
+    // formData.append("first_name", data.name);
     formData.append("description", data.description);
 
     visibility === "Public"?formData.append("network","1"):formData.append("network", "2");
-    
+    // formData.append("network", visibility === "Public" ? 1 : 2);
     console.log("Form submitted with data:", formData);
 
     // await addNewProject(formData).then((res) => {
       
     // });
+
+    await createProject( workspaceSlug, formData)
+      .then((res) => {
+        console.log("Project created successfully******************:", res);
+        if (res.statusCode === 201) {
+          toast.showToast("success", res.message);
+          // Reset form or close modal
+          dialogRef.current?.close();
+        }
+      })
       
     }
    
+    const handleClose = () => {
+      commandPaletteStore.toggleCreateProjectModal(false)
+    }
     
 
   return (
@@ -126,8 +158,9 @@ export const CreateProjectModal = () => {
       ref={dialogRef}
       className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-50 z-50 flex justify-center items-center"
     >
+      <ToastContainer />
       <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-xl h-[70vh] overflow-y-auto flex flex-col">
-        {/* Header with Background Image */}
+         
         <div
           className="relative w-full h-36 bg-cover bg-center rounded-t-xl"
           style={{
@@ -137,7 +170,7 @@ export const CreateProjectModal = () => {
           <div className="absolute top-1 right-5 flex flex-col items-center space-y-1">
             <button
               className="p-2 bg-white bg-opacity-55 rounded-full hover:bg-opacity-70 transition z-10"
-              // onClick={handleClose}
+              onClick={handleClose}
             >
               <X size={16} className="text-gray-800" />
             </button>
@@ -185,19 +218,21 @@ export const CreateProjectModal = () => {
           <div className="md:col-span-3">
             <Input
               className="w-full border rounded-md"
-              placeholder="Enter your password"
+              placeholder="Enter your project name"
               type="text"
               {...register("name")}
               onChange={(e) => {
                 const name = e.target.value;
                 const identifier = name.replace(/\s+/g, '-').slice(0, 5).toUpperCase();
                 setProjectIdentifier(identifier);
+                setValue("identifier", identifier);
+                console.log(identifier);
               }}
             />
           </div>
           {errors.name && (
             <p className="text-red-500 text-xs mt-0.5">
-              {errors.name?.message}
+              {errors.name?.message} dfffffffffff
             </p>
           )}
 
@@ -212,6 +247,11 @@ export const CreateProjectModal = () => {
             <Info className="absolute right-1.5 top-2 w-3 h-3 text-gray-400" />
              
           </div>
+          {errors.identifier && (
+            <p className="text-red-500 text-xs mt-0.5">
+              {errors.identifier?.message} ssssssssssssssssssssss
+            </p>
+          )}
           <div className="md:col-span-4">
             <Textarea
               className="w-full px-2 py-1.5 border rounded-md text-xs focus:border-blue-400 h-32"
@@ -219,6 +259,11 @@ export const CreateProjectModal = () => {
               {...register("description")}
             />
           </div>
+          {errors.description && (
+            <p className="text-red-500 text-xs mt-0.5">
+              {errors.description?.message} rrrrrrrrrrrrrrrr
+            </p>
+          )}
         </div>
         <div className="relative flex items-center gap-2 mt-3">
           <div className="relative flex items-center gap-2 mt-3">
@@ -265,40 +310,7 @@ export const CreateProjectModal = () => {
               </div>
             )}
             <div className="relative">
-              {/* <button 
-                className="flex items-center gap-1.5 px-3 py-2 border rounded-md text-xs"
-                onClick={toggleLeadDropdown}
-              >
-                <Users className="w-4 h-4" /> 
-                {selectedLead 
-                  ? workspaceMembers.find(m => m.id === selectedLead)?.name 
-                  : "Lead"}
-              </button> */}
-
-              {/* {isLeadDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-64 bg-white border rounded-lg shadow-md z-10">
-                  <div className="p-2">
-                    <input 
-                      type="text"
-                      placeholder="Search members"
-                      value={leadSearchQuery}
-                      onChange={(e) => setLeadSearchQuery(e.target.value)}
-                      className="w-full px-2 py-1 border rounded text-xs"
-                    />
-                  </div>
-                  <ul className="max-h-60 overflow-y-auto">
-                    {filteredMembers.map((member) => (
-                      <li 
-                        key={member.id}
-                        onClick={() => handleLeadSelection(member.id)}
-                        className="px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
-                      >
-                        {member.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )} */}
+              
             </div>
           </div>
         </div>
@@ -307,7 +319,7 @@ export const CreateProjectModal = () => {
           <Button
             type="button"
             className="px-3 py-2 border bg-white text-black rounded text-xs"
-            //   onClick={handleClose}
+              onClick={handleClose}
           >
             Cancel
           </Button>
@@ -318,114 +330,7 @@ export const CreateProjectModal = () => {
             Create project
           </Button>
         </div>
-        {/* 
-            <div className="md:col-span-3">
-              <input
-                type="text"
-                value={}
-                onChange={(e) => setProjectName(e.target.value)}
-                placeholder="Project name"
-                className={`w-full px-2 py-1.5 border rounded-md text-xs focus:border-blue-400 ${errors.projectName ? 'border-red-500' : ''}`}
-              />
-              {errors.projectName && <p className="text-red-500 text-xs mt-0.5">{errors.projectName}</p>}
-            </div>
-            <div className="relative">
-              <input
-                type="text"
-                value={projectId}
-                onChange={(e) => setProjectId(e.target.value)}
-                placeholder="Project ID"
-                className={`w-full px-2 py-1.5 border rounded-md text-xs focus:border-blue-400 pr-6 ${errors.projectId ? 'border-red-500' : ''}`}
-              />
-              <Info className="absolute right-1.5 top-2 w-3 h-3 text-gray-400" />
-              {errors.projectId && <p className="text-red-500 text-xs mt-0.5">{errors.projectId}</p>}
-            </div>
-            <div className="md:col-span-4">
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Description"
-                className="w-full px-2 py-1.5 border rounded-md text-xs focus:border-blue-400 h-32"
-              />
-            </div>
-          </div>
-
-          <div className="relative flex items-center gap-2 mt-3">
-            <button
-              type="button"
-              className="flex items-center gap-1 px-3 py-2 border rounded-md text-xs"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <Earth className="w-4 h-4" /> {visibility}
-            </button>
-            {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-64 bg-white border rounded-lg shadow-md z-10">
-                <button
-                  className="flex flex-col items-start px-4 py-2 w-full text-left text-sm hover:bg-gray-100"
-                  onClick={() => { setVisibility("Private"); setIsDropdownOpen(false); }}
-                >
-                  <div className="flex items-center gap-2"><Lock className="w-4 h-4" /> Private</div>
-                  <p className="text-gray-500 text-xs">Accessible only by invite</p>
-                </button>
-                <button
-                  className="flex flex-col items-start px-4 py-2 w-full text-left text-sm hover:bg-gray-100"
-                  onClick={() => { setVisibility("Public"); setIsDropdownOpen(false); }}
-                >
-                  <div className="flex items-center gap-2"><Earth className="w-4 h-4" /> Public {visibility === "Public" && <Check className="w-4 h-4 text-blue-500" />}</div>
-                  <p className="text-gray-500 text-xs">Anyone in the workspace except Guests can join</p>
-                </button>
-              </div>
-            )}
-            <div className="relative">
-              <button 
-                className="flex items-center gap-1.5 px-3 py-2 border rounded-md text-xs"
-                onClick={toggleLeadDropdown}
-              >
-                <Users className="w-4 h-4" /> 
-                {selectedLead 
-                  ? workspaceMembers.find(m => m.id === selectedLead)?.name 
-                  : "Lead"}
-              </button>
-
-              {isLeadDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-64 bg-white border rounded-lg shadow-md z-10">
-                  <div className="p-2">
-                    <input 
-                      type="text"
-                      placeholder="Search members"
-                      value={leadSearchQuery}
-                      onChange={(e) => setLeadSearchQuery(e.target.value)}
-                      className="w-full px-2 py-1 border rounded text-xs"
-                    />
-                  </div>
-                  <ul className="max-h-60 overflow-y-auto">
-                    {filteredMembers.map((member) => (
-                      <li 
-                        key={member.id}
-                        onClick={() => handleLeadSelection(member.id)}
-                        className="px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
-                      >
-                        {member.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div> */}
-
-        {/* <div className="flex justify-end gap-2 pt-3 border-t mt-auto">
-            <button
-              type="button"
-              className="px-3 py-2 border rounded text-xs"
-              onClick={handleClose}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="px-3 py-2 bg-blue-600 text-white rounded text-xs">
-              Create project
-            </button>
-          </div> */}
+         
       </form>
 
         

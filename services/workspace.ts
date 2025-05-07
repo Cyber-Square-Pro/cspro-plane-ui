@@ -11,6 +11,7 @@ export class WorkspaceService extends APIService {
 
 
     async createWorkspace(data: Partial<IWorkspace>): Promise<any> {
+      console.log(data, "calling create workspace")
         return this.post("/api/users/me/workspaces/", data)
           .then((response) => {
             return response?.data;

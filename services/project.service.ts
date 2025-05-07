@@ -9,12 +9,19 @@ export class ProjectService extends APIService {
     }
 
     async createProject(workspaceSlug: string, data: Partial<IProject>) {
-
         return this.post(`/api/workspace/${workspaceSlug}/projects/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response;
             });
     }
+
+async fetchProjects(workspaceSlug: string): Promise<IProject[]> {
+    return this.get(`/api/workspace/${workspaceSlug}/projects/`)
+        .then((response) => response?.data)
+        .catch((error) => {
+            throw error?.response;
+        });
+    }
 
 }
