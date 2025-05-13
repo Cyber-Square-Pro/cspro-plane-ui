@@ -8,55 +8,28 @@ import { CreateProjectModal } from "../../_components/modals/create-project-moda
 import { observer } from "mobx-react-lite";
 import { ICreateProject } from "@/types/project";
 import { useEffect } from "react";
-import { useParams } from 'next/navigation';
-
-const ProjectCard: React.FC<Project> = ({
-  title,
-  status,
-  description,
-  updated,
-  backgroundUrl,
-}) => {
-  return (
-    <div className="relative border rounded-lg bg-white shadow-md hover:shadow-xl transition-all overflow-hidden">
-      <div
-        className="h-40 bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundUrl})` }}
-      >
-        <div className="absolute top-2 left-2 bg-white rounded-full p-1 shadow">
-          <Star size={16} className="text-yellow-400 cursor-pointer" />
-        </div>
-      </div>
-      <div className="p-4">
-        <h3 className="font-medium text-black-900">{title}</h3>
-        <p className="text-sm text-black-600 mb-3">{description}</p>
-        <span className="text-sm text-black-500">{updated}</span>
-      </div>
-      <div className="flex space-x-2 absolute top-2 right-2">
-        <Link size={16} className="cursor-pointer text-white" />
-      </div>
-    </div>
-  );
-};
+import { useParams } from "next/navigation";
+import ProjectCard from "../../_components/cards/project-card";
+import NoProject from "../../_components/no-project";
 
 const ProjectListPage = observer(() => {
-
-
-   const {  project:{projects,fetchProjects}, workspace:{} } =  useMobxStore();
-  console.log('projects', projects)
   
-    const params = useParams();
-  
-    // Access the workspaceSlug
-    const workspaceSlug = params.workspaceSlug as string;
-  
-  useEffect(() => {
-    if (workspaceSlug) {
-      fetchProjects(workspaceSlug);
-    }
-  }, [workspaceSlug]);
+  const {
+    project: { workspaceProjects },
+  } = useMobxStore();
 
+  const params = useParams();
 
+  // Access the workspaceSlug
+  const workspaceSlug = params.workspaceSlug as string;
+
+  // useEffect(() => {
+  //   if (workspaceSlug) {
+  //     fetchProjects(workspaceSlug).then((res) => {
+  //       console.log("Fetched projects:", res?.data.projects);
+  //   });
+  //   }
+  // }, [workspaceSlug]);
 
   const { commandPalette: commandPaletteStore } = useMobxStore();
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,11 +49,7 @@ const ProjectListPage = observer(() => {
 
   return (
     <>
-      {commandPaletteStore.isCreateProjectModalOpen && (
-        <CreateProjectModal
-    
-        />
-      )}
+      {commandPaletteStore.isCreateProjectModalOpen && <CreateProjectModal />}
       <DashboardHeader
         icon={BaggageClaim}
         title="Projects"
@@ -110,46 +79,78 @@ const ProjectListPage = observer(() => {
             </select>
           </div>
 
-          <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-            {paginatedProjects.map((project, index) => (
-              <ProjectCard key={index} {...project} />
-            ))}
-             {/* {projects.map((project: Project, index: number) => (
-               <ProjectCard key={index} {...project} />
-             ))} */}
+          <div className="p-4">
+            {workspaceProjects.length === 0 ? (
+              <div className="text-gray-500 text-center text-sm">
+             
+             <NoProject />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                {workspaceProjects.map((project, index) => (
+                  <ProjectCard
+                    key={project.id || index}
+                    projectName={project.project_name}
+                    url={project.cover_image || ""}
+                    id={project.id}
+                    description={project.description}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="border-t border-gray-200 px-4 py-3 flex items-center justify-between">
-            <div className="flex items-center">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => handlePageChange(currentPage - 1)}
-              >
-                <i className="fas fa-arrow-left"></i>
-              </button>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-700">
-                Page {currentPage} of {totalPages}
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  disabled={currentPage === 1}
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  <i className="fas fa-arrow-left"></i> Previous
-                </button>
-                <button
-                  disabled={currentPage === totalPages}
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  Next <i className="fas fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+  {workspaceProjects.length > 0 ? (
+  <>
+    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+      {workspaceProjects.map((project, index) => (
+        <ProjectCard
+          key={index}
+          projectName={project.project_name}
+          url={project.cover_image || ""}
+          id={project.id}
+          description={project.description}
+        />
+      ))}
+    </div>
+
+    {/* Pagination footer shown only when projects exist */}
+    <div className="border-t border-gray-200 px-4 py-3 flex items-center justify-between">
+      <div className="flex items-center">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          <i className="fas fa-arrow-left"></i>
+        </button>
+      </div>
+      <div className="flex items-center gap-4">
+        <span className="text-sm text-gray-700">
+          Page {currentPage} of {totalPages}
+        </span>
+        <div className="flex items-center gap-2">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+            className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            <i className="fas fa-arrow-left"></i> Previous
+          </button>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+            className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            Next <i className="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </>
+) : (
+ 
+ <></>
+)}    
         </div>
       </div>
     </>

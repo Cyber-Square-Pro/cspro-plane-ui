@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "@/config/server.api.config";
 import { APIService } from "./api.service";
-import { IProject } from "@/types/project";
+import { IProject, IProjectLite } from "@/types/project";
 
 export class ProjectService extends APIService {
 
@@ -16,9 +16,13 @@ export class ProjectService extends APIService {
             });
     }
 
-async fetchProjects(workspaceSlug: string): Promise<IProject[]> {
+async fetchProjects(workspaceSlug: string): Promise<IProjectLite[]> {
     return this.get(`/api/workspace/${workspaceSlug}/projects/`)
-        .then((response) => response?.data)
+        .then((response) =>{ 
+           console.log('response from fetchProjects', response)
+   
+           console.log('response data projects from fetchProjects', response?.data?.projects)
+            return response?.data?.projects;})
         .catch((error) => {
             throw error?.response;
         });

@@ -8,6 +8,10 @@ import { Popover, PopoverTrigger } from "@nextui-org/react";
 import WorkspacePopover from "../_components/workspace-popover";
 import ProfilePopover from "../_components/profile-popover";
 import { UserWrapper } from "./wrapper/user-wrapper";
+import { useMobxStore } from "@/store/store.provider";
+import { useEffect } from "react";
+import { observer } from "mobx-react-lite";
+
 
 
 /*
@@ -33,6 +37,22 @@ const WorkspaceLayout = ({
   params: { workspaceSlug: string };
 }) => {
   const { workspaceSlug } = params;
+    const {  project:{workspaceProjects,fetchProjects} } =  useMobxStore();
+  // console.log('projects from layout', workspaceProjects)
+  // console.log('workspaceSlug from layout', workspaceSlug)
+
+
+  useEffect(() => {
+  if (workspaceSlug) {
+    fetchProjects(workspaceSlug);
+  }
+}, [workspaceSlug]);
+
+console.log("Projects from layout:", workspaceProjects);
+console.log("Workspace slug from layout:", workspaceSlug);
+
+ 
+
 
   return (
     <UserWrapper>
@@ -72,4 +92,4 @@ const WorkspaceLayout = ({
   );
 };
 
-export default WorkspaceLayout;
+export default observer(WorkspaceLayout); 
