@@ -40,7 +40,7 @@ export class ProjectStore implements IProjectStore {
     if (response) {
       runInAction(() => {
         const projects = response?.project;
-       this.workspaceProjects = [...this.workspaceProjects, response]; //copying
+       this.workspaceProjects = [...this.workspaceProjects, projects]; //copying
         
       });
     }

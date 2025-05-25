@@ -16,25 +16,29 @@ const ProjectCard:React.FC<Props> = (props) => {
 console.log('//////////////////////////////', url)
 if(!url) {
     
-    imageUrl ='/noPic.webp'
+    imageUrl ='/no-project-img.jpeg'
 }
   // Construct the full image URL by combining the base URL and the image path
   return (
-      <div className="w-64 bg-white rounded-lg shadow-lg overflow-hidden">
+      
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg border border-gray-200 flex flex-col">
+      
       {/* Project Image */}
-      <img src={imageUrl} alt={projectName} className="w-full h-40 object-cover" />
+      <img
+        src={imageUrl}
+        alt={projectName}
+        className="w-full h-40 object-cover"
+      />
 
-      {/* Project Name */}
-      <div className="p-4">
-        <h3 className="text-xl font-semibold text-gray-800 text-center">{projectName}  </h3>
-      </div>
-      <div>
-        <p>
-            {description}
-        </p>
+      {/* Project Details */}
+      <div className="p-4 flex flex-col gap-2 flex-grow">
+        <h3 className="text-lg font-semibold text-gray-800 text-center">{projectName}</h3>
+        <p className="text-sm text-gray-600 line-clamp-3">{description}</p>
       </div>
     </div>
-  )
-}
+  );
+};
+
+
 
 export default ProjectCard

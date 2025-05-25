@@ -17,36 +17,10 @@ const ProjectListPage = observer(() => {
   const {
     project: { workspaceProjects },
   } = useMobxStore();
-
-  const params = useParams();
-
-  // Access the workspaceSlug
-  const workspaceSlug = params.workspaceSlug as string;
-
-  // useEffect(() => {
-  //   if (workspaceSlug) {
-  //     fetchProjects(workspaceSlug).then((res) => {
-  //       console.log("Fetched projects:", res?.data.projects);
-  //   });
-  //   }
-  // }, [workspaceSlug]);
+ 
 
   const { commandPalette: commandPaletteStore } = useMobxStore();
-  const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 6;
-  const totalPages = Math.ceil(projectData.length / projectsPerPage);
-
-  const paginatedProjects = projectData.slice(
-    (currentPage - 1) * projectsPerPage,
-    currentPage * projectsPerPage
-  );
-
-  const handlePageChange = (newPage: number) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-    }
-  };
-
+ 
   return (
     <>
       {commandPaletteStore.isCreateProjectModalOpen && <CreateProjectModal />}
@@ -86,7 +60,7 @@ const ProjectListPage = observer(() => {
              <NoProject />
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+              <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                 {workspaceProjects.map((project, index) => (
                   <ProjectCard
                     key={project.id || index}
@@ -100,168 +74,14 @@ const ProjectListPage = observer(() => {
             )}
           </div>
 
-  {workspaceProjects.length > 0 ? (
-  <>
-    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-      {workspaceProjects.map((project, index) => (
-        <ProjectCard
-          key={index}
-          projectName={project.project_name}
-          url={project.cover_image || ""}
-          id={project.id}
-          description={project.description}
-        />
-      ))}
-    </div>
-
-    {/* Pagination footer shown only when projects exist */}
-    <div className="border-t border-gray-200 px-4 py-3 flex items-center justify-between">
-      <div className="flex items-center">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
-        >
-          <i className="fas fa-arrow-left"></i>
-        </button>
-      </div>
-      <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-700">
-          Page {currentPage} of {totalPages}
-        </span>
-        <div className="flex items-center gap-2">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => handlePageChange(currentPage - 1)}
-            className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            <i className="fas fa-arrow-left"></i> Previous
-          </button>
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => handlePageChange(currentPage + 1)}
-            className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Next <i className="fas fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </>
-) : (
  
- <></>
-)}    
         </div>
       </div>
     </>
   );
 });
 
-interface Project {
-  title: string;
-  status: string;
-  description: string;
-  updated: string;
-  backgroundUrl: string;
-}
-
-const projectData: Project[] = [
-  {
-    title: "Project 1",
-    status: "Active",
-    description: "Description...",
-    updated: "Updated 2 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 2",
-    status: "In Progress",
-    description: "Description...",
-    updated: "Updated 5 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 3",
-    status: "Planning",
-    description: "Description...",
-    updated: "Updated 1 week ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 4",
-    status: "Completed",
-    description: "Description...",
-    updated: "Updated 3 weeks ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 5",
-    status: "Ongoing",
-    description: "Description...",
-    updated: "Updated 2 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 6",
-    status: "Research Phase",
-    description: "Description...",
-    updated: "Updated 4 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 7",
-    status: "Active",
-    description: "Description...",
-    updated: "Updated 2 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 8",
-    status: "In Progress",
-    description: "Description...",
-    updated: "Updated 5 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 9",
-    status: "Planning",
-    description: "Description...",
-    updated: "Updated 1 week ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 10",
-    status: "Completed",
-    description: "Description...",
-    updated: "Updated 3 weeks ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 11",
-    status: "Ongoing",
-    description: "Description...",
-    updated: "Updated 2 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-  {
-    title: "Project 12",
-    status: "Research Phase",
-    description: "Description...",
-    updated: "Updated 4 days ago",
-    backgroundUrl:
-      "https://cdn.pixabay.com/photo/2019/10/11/09/23/lake-4541454_1280.jpg",
-  },
-];
+ 
+ 
 
 export default ProjectListPage;
