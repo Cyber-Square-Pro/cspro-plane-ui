@@ -28,4 +28,17 @@ async fetchProjects(workspaceSlug: string): Promise<IProjectLite[]> {
         });
     }
 
+ 
+    async fetchProjectDetails(projectId: number) {
+    return this.get(`/api/workspace/project/${projectId}`)
+        .then((response) =>{ 
+            return response?.data?.project;})
+        .catch((error) => {
+            throw error?.response;
+        });
+    }
+
+    
+
+    
 }

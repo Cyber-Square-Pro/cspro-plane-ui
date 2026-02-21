@@ -1,5 +1,6 @@
 import React from 'react'
-import { DashboardOverView } from '../_components/dashboard-overview'
+import { DashboardOverView } from '../../_components/dashboard-overview'
+import { Card } from '@nextui-org/react'
 
 /*
   Author: Fidha on May 21st, 2024

@@ -146,7 +146,7 @@
 
       }
       catch (error) {
-        console.log('no tokennnnnnnn');
+
         
         return Promise.reject(error);
       }
@@ -177,7 +177,7 @@
         method: "delete",
         url: this.baseURL + url,
         data: data,
-        //   headers: this.getAccessToken() ? this.getHeaders() : {},
+        
         ...config,
       });
     }
