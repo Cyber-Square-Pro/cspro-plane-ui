@@ -28,12 +28,12 @@ Setting up local environment is extremely easy and straight forward. Follow the 
 
 
 ```bash
-  git clone -b development https://github.com/Cyber-Square-Pro/cs-plane-ui.git
+  git clone -b development https://github.com/Cyber-Square-Pro/cspro-plane-ui.git
 
 ```
 2. Switch to project folder using:
 ```bash
-  cd cs-plane-ui
+  cd cspro-plane-ui
 
 ```
 3. Install the packages using:
@@ -54,7 +54,6 @@ NEXT_PUBLIC_LOCAL_ASSET_BASE_URL="https://raw.githubusercontent.com/Cyber-Square
 
 # #development
 # NEXT_PUBLIC_ASSET_BASE_URL="http://api.plane-dev.pro.cybersquare.org/"
-
  
 ```
 6. Start the backend server.
@@ -64,8 +63,6 @@ npm run dev
 ```
 8. Open http://localhost:3000 with your browser to see the application.
 You are now ready to make changes to the code. Don't forget to refresh the browser (in case it does not auto-reload).
-
-
 
 ## Screenshots
 
