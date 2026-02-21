@@ -28,7 +28,7 @@ Setting up local environment is extremely easy and straight forward. Follow the 
 
 
 ```bash
-  git clone -b development https://github.com/Cyber-Square-Pro/cspro-plane-ui.git
+  git clone -b main https://github.com/Cyber-Square-Pro/cspro-plane-ui.git
 
 ```
 2. Switch to project folder using:
