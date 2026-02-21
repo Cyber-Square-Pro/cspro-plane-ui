@@ -44,7 +44,18 @@ Setting up local environment is extremely easy and straight forward. Follow the 
 5. create a .env.local file at the root of the project and add the following:
 ```bash
 NEXT_PUBLIC_BASE_URL="http://localhost:3000/"
-NEXT_PUBLIC_BASE_API_URL=" http://127.0.0.1:8000/"
+NEXT_PUBLIC_BASE_API_URL="http://127.0.0.1:8000/"
+
+#local
+NEXT_PUBLIC_BASE_ASSET_URL="http://localhost:8000/"
+
+NEXT_PUBLIC_LOCAL_ASSET_BASE_URL="https://raw.githubusercontent.com/Cyber-Square-Pro/project-assets/main/Plane/"
+
+
+# #development
+# NEXT_PUBLIC_ASSET_BASE_URL="http://api.plane-dev.pro.cybersquare.org/"
+
+ 
 ```
 6. Start the backend server.
 7. To run the development server, use:
