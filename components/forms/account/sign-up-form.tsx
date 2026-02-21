@@ -82,8 +82,7 @@ export const SignUpForm: React.FC<Props> = (props) => {
           type="submit"
           disabled= {!isValid || isSubmitting}
         >
-           {isSubmitting ? "Signing Up..." : "Sign Up"}   {/* showing button text conditionally  */}
-         
+           {isSubmitting ? "Signing Up..." : "Sign Up"}   
         </Button>
       </div>
       <div className="py-2 text-center">
