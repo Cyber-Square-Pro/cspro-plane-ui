@@ -28,9 +28,9 @@ const SignUpPage = () => {
 
   const onFormSubmit = (formData: IEmailPasswordFormValues) => {
 
+    setIsSubmitting(true)
     return authService.userSignUp(formData).then((response) => {
-      console.log(response?.statusCode)
-      setIsSubmitting(true)
+      console.log(response?.statusCode) 
       if (response?.statusCode == 201) {
 
         toast.showToast("success", response?.message);
@@ -42,6 +42,7 @@ const SignUpPage = () => {
       if (response?.statusCode == 409) {
         toast.showToast("error", response?.message);
         setIsSubmitting(false)
+        
       }
     });
   };

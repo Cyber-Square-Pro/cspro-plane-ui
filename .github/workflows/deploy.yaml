@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - development  
+      - main  
 
 jobs:
   deploy:
@@ -31,11 +31,11 @@ jobs:
         
           script: |
             export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v20.12.2/bin
-            cd /home/ubuntu/PLANE-UI/DEV/cs-plane-ui
+            cd /home/ubuntu/PROJECT/UI/cspro-plane-ui
             git pull origin development
             npm run build   
             sudo systemctl restart nginx  # Restart nginx server
-            pm2 restart cs-plane-dev   # restart pm2
+            pm2 restart plane-granthium   # restart pm2
    
 
 
