@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Plane App UI
+**What is CS Pro Plane App?**
 
-## Getting Started
+CS Pro Plane is a versatile and comprehensive project management software built for teams that prioritize delivering exceptional customer
+value. Ideal for product development, IT services, professional services, agencies, and design firms, this software enables mission-critical
+teams to streamline their workflows, collaborate effectively, and achieve their goals.
+With CS Pro Plane, you can seamlessly integrate your workflows, enhance team collaboration, and maintain full visibility over your projects.
+Its flexible features cater to various methodologies and processes, ensuring that every team can operate in a way that best suits their
+unique needs. By centralizing all project activities in one place, this app helps you stay organized, prioritize tasks effectively, and deliver
+outstanding results.
 
-First, run the development server:
+
+
+## Features
+
+- Issues: Quickly create issues and add details using a powerful rich text editor that supports file uploads. Add sub-properties and references to problems for better organization and tracking.
+- Sprints: Keep up your team's momentum with sprints. Gain insights into your project's progress with burn-down charts and other valuable features.
+- Modules: Break down your large projects into smaller, more manageable modules. Assign modules between teams to track and plan your project's progress easily.
+- Analytics: Get insights into all your CS Pro Plane data in real-time. Visualize issue data to spot trends, remove blockers, and progress your work.
+- Time tracking (coming soon): CS Pro Plane also includes a powerful time tracking feature, allowing teams to monitor the time spent on tasks and projects accurately.
+
+
+## Installation
+
+Setting up local environment is extremely easy and straight forward. Follow the below step and you will be ready to contribute.
+
+1. Clone the code locally using:
+
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone -b development https://github.com/Cyber-Square-Pro/cs-plane-ui.git
+
 ```
+2. Switch to project folder using:
+```bash
+  cd cs-plane-ui
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+3. Install the packages using:
+```bash
+  npm install
+```
+4. Open the code on VS Code or similar equivalent IDE.
+5. create a .env.local file at the root of the project and add the following:
+```bash
+NEXT_PUBLIC_BASE_URL="http://localhost:3000/"
+NEXT_PUBLIC_BASE_API_URL=" http://127.0.0.1:8000/"
+```
+6. Start the backend server.
+7. To run the development server, use:
+```bash
+npm run dev
+```
+8. Open http://localhost:3000 with your browser to see the application.
+You are now ready to make changes to the code. Don't forget to refresh the browser (in case it does not auto-reload).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+![dashboard](https://github.com/Cyber-Square-Pro/cs-pro-plane-ui/assets/154955593/9c51e9ef-1a42-47b4-a8d4-51a9ad54c041)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![workspace](https://github.com/Cyber-Square-Pro/cs-pro-plane-ui/assets/154955593/3b449d9d-c34f-4539-901d-771584443a79)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+ 
+## Scripts
 
-## Deploy on Vercel
+dev: Starts the development server.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+build: Builds the application for production.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+start: Starts the production server.
+
+lint: Runs ESLint to check for linting errors.
