@@ -84,7 +84,7 @@ const SignInPage = () => {
         <>
           <div className="flex justify-center items-center h-full">
             <div className="max-w-xl px-4 w-full">
-              <FormHeading headingText="Welcome Back, let's get on board!" />
+              <FormHeading headingText="Welcome Back, let's get on board!!" />
 
               <FormDescription descriptionText="Get back to your issues, projects and workspaces." />
 
