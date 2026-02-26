@@ -80,3 +80,6 @@ build: Builds the application for production.
 start: Starts the production server.
 
 lint: Runs ESLint to check for linting errors.
+  
+  
+"University of Belize - CI/CD Cohort"
