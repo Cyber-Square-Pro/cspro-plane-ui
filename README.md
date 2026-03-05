@@ -64,6 +64,11 @@ npm run dev
 8. Open http://localhost:3000 with your browser to see the application.
 You are now ready to make changes to the code. Don't forget to refresh the browser (in case it does not auto-reload).
 
+NOTE: If you are unable to access the website via localhost make sure that next JS is running on the 3000 port. You can verify this by running:
+```bash
+netstat -ano | findstr :3000
+```
+
 ## Screenshots
 
 ![dashboard](https://github.com/Cyber-Square-Pro/cs-pro-plane-ui/assets/154955593/9c51e9ef-1a42-47b4-a8d4-51a9ad54c041)
