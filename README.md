@@ -82,3 +82,4 @@ start: Starts the production server.
 lint: Runs ESLint to check for linting errors.
 # UB CI/CD Cohort Information
 **CMPS 4131 - Software Engineering - Group 2**
+IB
