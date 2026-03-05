@@ -81,6 +81,10 @@ start: Starts the production server.
 
 lint: Runs ESLint to check for linting errors.
 
+## UB Course Information
+
+- CMPS4131 - Software Engineering
+
 
 Session 1: 
   University of Belize - CI/CD Cohort
