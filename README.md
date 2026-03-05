@@ -84,4 +84,4 @@ lint: Runs ESLint to check for linting errors.
 
 Session 1: 
   University of Belize - CI/CD Cohort
-  Task Message - Local Note
+  Task Message - Local Note 25s
