@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+# CS Pro Plane – Project Management Platform
+=======
 # Plane App UI | University of Belize
+>>>>>>> main
 **What is CS Pro Plane App?**
 
 CS Pro Plane is a versatile and comprehensive project management software built for teams that prioritize delivering exceptional customer
@@ -18,7 +22,12 @@ outstanding results.
 - Modules: Break down your large projects into smaller, more manageable modules. Assign modules between teams to track and plan your project's progress easily.
 - Analytics: Get insights into all your CS Pro Plane data in real-time. Visualize issue data to spot trends, remove blockers, and progress your work.
 - Time tracking (coming soon): CS Pro Plane also includes a powerful time tracking feature, allowing teams to monitor the time spent on tasks and projects accurately.
+<<<<<<< HEAD
+- Dark Mode (coming soon): Switch between light and dark themes for improved accessibility and user comfort.
+
+=======
 - Notifications (coming soon): Receive alerts for issue updates, sprint changes, and important project activity.
+>>>>>>> main
 
 ## Installation
 
