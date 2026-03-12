@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CS Pro Plane",
+  title: "CS Pro Plane - UB Cohort",
   description: "Track your issues, projects and workspaces",
 };
 
