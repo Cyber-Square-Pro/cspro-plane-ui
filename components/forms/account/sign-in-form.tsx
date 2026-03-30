@@ -20,6 +20,7 @@ export const SignInForm: React.FC<Props> = (props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isValid },
   } = useForm<TSignInValidator>({
     resolver: zodResolver(SignInValidator),
@@ -52,6 +53,14 @@ export const SignInForm: React.FC<Props> = (props) => {
           type="submit"
         >
           Login
+        </Button>
+        <Button
+          className="w-full border rounded-md mt-1"
+          type="button"
+          variant="secondary"
+          onClick={() => reset()}
+        >
+          Cancel (Clear Form)
         </Button>
       </div>
       <div className="py-2 text-center">
