@@ -21,15 +21,19 @@ export const SignInForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     formState: { isValid },
+    reset, 
   } = useForm<TSignInValidator>({
     resolver: zodResolver(SignInValidator),
   });
   const { onFormSubmit } = props;
 
+  const handleCancel = () => {
+    reset({ email: "", password: "" });
+  };
+
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <div className="py-2">
-         
         <Input
           className="w-full border rounded-md"
           placeholder="Enter your email"
@@ -52,6 +56,14 @@ export const SignInForm: React.FC<Props> = (props) => {
           type="submit"
         >
           Login
+        </Button>
+        <Button
+          className="w-full border rounded-md mt-1"
+          type="button"
+          variant="secondary"
+          onClick={handleCancel} 
+        >
+          Cancel
         </Button>
       </div>
       <div className="py-2 text-center">
