@@ -12,17 +12,25 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
+
+
 interface Props {
   onFormSubmit: (formData: IEmailPasswordFormValues) => void;
 }
 
 export const SignInForm: React.FC<Props> = (props) => {
+  const [showPassword, setShowPassword] = React.useState(false); //added state to toggle password visibility
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isValid },
   } = useForm<TSignInValidator>({
     resolver: zodResolver(SignInValidator),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
   const { onFormSubmit } = props;
 
@@ -41,9 +49,16 @@ export const SignInForm: React.FC<Props> = (props) => {
         <Input
           className="w-full border rounded-md"
           placeholder="Enter your password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           {...register("password")}
         />
+        <div className="flex items-center gap-2 mt-2">
+      <input                                            //added the check box to toggle password visibility
+        type="checkbox"
+        onChange={() => setShowPassword(!showPassword)}
+      />
+  <span className="text-sm">Show Password</span>
+</div>
       </div>
       <div className="py-2">
         <Button
@@ -52,6 +67,16 @@ export const SignInForm: React.FC<Props> = (props) => {
           type="submit"
         >
           Login
+        </Button>
+         <Button
+          className="w-full border rounded-md"
+          type="button"
+          onClick={() => reset({
+            email: "",
+            password: "",
+          })}
+        >
+          Cancel
         </Button>
       </div>
       <div className="py-2 text-center">
