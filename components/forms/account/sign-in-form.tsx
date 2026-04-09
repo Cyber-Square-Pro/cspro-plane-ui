@@ -27,36 +27,60 @@ export const SignInForm: React.FC<Props> = (props) => {
   const { onFormSubmit } = props;
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)}>
-      <div className="py-2">
-         
+    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-5">
+      {/* Email Input - Made larger, more rounded and increased padding */}
+      <div>
         <Input
-          className="w-full border rounded-md"
-          placeholder="Enter your email"
+          className="w-full rounded-full py-6 px-5 text-base border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+          placeholder="Email"
           {...register("email")}
         />
       </div>
 
-      <div className="py-2">
+      {/* Password Input - Made larger, more rounded and increased padding */}
+      <div>
         <Input
-          className="w-full border rounded-md"
-          placeholder="Enter your password"
+          className="w-full rounded-full py-6 px-5 text-base border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+          placeholder="Password"
           type="password"
           {...register("password")}
         />
       </div>
-      <div className="py-2">
+
+      {/* Added Forgot Password Link */}
+      <div className="text-right">
+        <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+          Forgot your password?
+        </Link>
+      </div>
+
+      {/* Login Button - Made larger and more rounded */}
+      <div>
         <Button
-          className="w-full border rounded-md"
+          className="w-full rounded-full py-6 text-base font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
           disabled={!isValid}
           type="submit"
         >
           Login
         </Button>
       </div>
-      <div className="py-2 text-center">
-        <span className="bg-slate-50"> Dont have an account?</span>
-        <Link href="/sign-up"> Signup</Link>
+
+      {/* OR Divider */}
+      <div className="relative my-6">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-300"></div>
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-2 bg-white text-gray-500">OR</span>
+        </div>
+      </div>
+
+      {/* Sign Up Link - Repositioned below the OR divider*/}
+      <div className="text-center text-sm">
+        <span className="text-gray-600">Dont have an account?</span>{" "}
+        <Link href="/sign-up" className="text-blue-600 hover:underline font-medium">
+          Sign up
+        </Link>
       </div>
     </form>
   );
