@@ -43,7 +43,7 @@ export const DashboardOverView: React.FC = () => {
  
           <div className="grid lg:grid-cols-2 gap-7">
             <div className="lg:col-span-2">
-              <div className="bg-[#ffffff] rounded-xl border-[0.5px] w-full grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 p-0.5 hover:shadow-md duration-300 [&>div>a>div]:border-r [&>div:last-child>a>div]:border-0 [&>div>a>div]:border-2[&>div:nth-child(2)>a>div]:border-0 [&>div:nth-child(2)>a>div]:lg:border-r">
+              <div className="bg-[#ffffff] rounded-xl border-[0.5px] w-full grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 p-0.5 hover:shadow-md duration-300 [&>div>a>div]:border-r [&>div:last-child>a>div]:border-0 [&>div>a>div]:border-2[&>div:nth-child(2)>a>div]:border-0 [&>div:nth-child(2)>a>div]:lg:border-r">
                 {/* Render issue status cards with an icon and in color */}
                 <IssueStatusCard count={0} description="Issues Assigned" icon={ListTodo} color="text-blue-500" hoverBg="hover:bg-blue-50"/>
                 <IssueStatusCard count={0} description="Issues Created" icon={Clock} color="text-yellow-500" hoverBg="hover:bg-yellow-50"/>
