@@ -12,8 +12,6 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-
-
 interface Props {
   onFormSubmit: (formData: IEmailPasswordFormValues) => void;
 }
@@ -37,7 +35,6 @@ export const SignInForm: React.FC<Props> = (props) => {
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <div className="py-2">
-         
         <Input
           className="w-full border rounded-md"
           placeholder="Enter your email"
@@ -52,13 +49,22 @@ export const SignInForm: React.FC<Props> = (props) => {
           type={showPassword ? "text" : "password"}
           {...register("password")}
         />
-        <div className="flex items-center gap-2 mt-2">
-      <input                                            //added the check box to toggle password visibility
-        type="checkbox"
-        onChange={() => setShowPassword(!showPassword)}
-      />
-  <span className="text-sm">Show Password</span>
-</div>
+        <div className="mt-2 flex items-center justify-between">
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              onChange={(e) => setShowPassword(e.target.checked)}
+            />
+            <span>Show Password</span>
+          </label>
+
+          <Link
+            href="/forgot-password"
+            className="text-sm text-blue-600 hover:underline"
+          >
+            Forgot Password?
+          </Link>
+        </div>
       </div>
       <div className="py-2">
         <Button
@@ -68,13 +74,15 @@ export const SignInForm: React.FC<Props> = (props) => {
         >
           Login
         </Button>
-         <Button
+        <Button
           className="w-full border rounded-md"
           type="button"
-          onClick={() => reset({
-            email: "",
-            password: "",
-          })}
+          onClick={() =>
+            reset({
+              email: "",
+              password: "",
+            })
+          }
         >
           Cancel
         </Button>

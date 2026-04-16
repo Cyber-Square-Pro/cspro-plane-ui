@@ -32,7 +32,7 @@ const ProjectCreateForm: React.FC<Props> = (props) => {
   };
 
   return (
-    <form >
+    <form className="space-y-4"> {/* added space between form elements */}
       <div className="flex">
         <div className="flex flex-row  w-full">
           <div className="px-1 py-2  w-[78%]">
