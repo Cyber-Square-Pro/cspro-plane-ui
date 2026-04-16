@@ -64,18 +64,26 @@ const ProjectListPage = observer(() => {
               </div>
             ) : (
               <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                {workspaceProjects.map((project, index) => (
-                  <Link href={`/workspaces/${workspaceSlug}/projects/${project.id}`} key={`project-${project.id}`}>
-                     
-                    <ProjectCard
-                      key={project.id || index}
-                      projectName={project.project_name}
-                      url={project.cover_image || ""}
-                      id={project.id}
-                      description={project.description}
-                    />
-                  </Link>
-                ))}
+                {workspaceProjects.map((project, index) => {
+                  // Ensure status and createdAt are always provided and valid
+                  const status = project.status || 'Active';
+                  // Accepts 'Active' or 'Completed' only for ProjectCard
+                  const validStatus = status === 'Completed' ? 'Completed' : 'Active';
+                  const createdAt = project.created_at || new Date().toISOString();
+                  return (
+                    <Link href={`/workspaces/${workspaceSlug}/projects/${project.id}`} key={`project-${project.id}`}>
+                      <ProjectCard
+                        key={project.id || index}
+                        projectName={project.project_name}
+                        url={project.cover_image || ""}
+                        id={project.id}
+                        description={project.description}
+                        status={validStatus}
+                        createdAt={createdAt}
+                      />
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
