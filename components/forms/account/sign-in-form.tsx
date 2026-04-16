@@ -45,6 +45,11 @@ export const SignInForm: React.FC<Props> = (props) => {
           {...register("password")}
         />
       </div>
+      <div className="py-1 text-right">
+        <Link href="/forgot-password" className="text-xs text-gray-500 hover:underline">
+        Forgot password?
+        </Link>
+      </div>
       <div className="py-2">
         <Button
           className="w-full border rounded-md"
