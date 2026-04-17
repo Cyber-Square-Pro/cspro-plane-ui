@@ -83,3 +83,6 @@ start: Starts the production server.
 lint: Runs ESLint to check for linting errors.
 # UB CI/CD Cohort Information
 **CMPS 4131 - Software Engineering - Group 2**
+
+## Deployment
+This project is configured to automatically deploy to AWS EC2 using GitHub Actions when changes are merged into the `main` branch.
