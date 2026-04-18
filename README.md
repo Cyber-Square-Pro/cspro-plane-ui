@@ -83,3 +83,11 @@ start: Starts the production server.
 lint: Runs ESLint to check for linting errors.
 # UB CI/CD Cohort Information
 **CMPS 4131 - Software Engineering - Group 2**
+
+## Development Workflow
+When contributing to this project, please follow these steps:
+1. Create an issue on GitHub describing the feature or bug.
+2. Create a feature branch linked to the issue (e.g., `feature/UB-22-add-workflow`).
+3. Make your changes and commit them with a descriptive message.
+4. Push your branch to the repository and open a Pull Request.
+5. Have your PR reviewed by a peer before merging.
