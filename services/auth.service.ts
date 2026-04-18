@@ -47,6 +47,36 @@ export class AuthService extends APIService {
             this.removeRefreshToken();
             return Promise.resolve();
           }
+
+        /**
+         * Author: Tysha Daniels on April 18, 2025
+         * Purpose: Sends a password-reset link to the given email address.
+         * Input: email
+         * Return: { message, statusCode }
+         */
+        async forgotPassword(email: string): Promise<any> {
+            return this.axiosObj
+                .post(API_BASE_URL + "/api/user/forgot-password/", { email }, { headers: {} })
+                .then((response) => response?.data)
+                .catch((error) => { throw error?.response?.data; });
+        }
+
+        /**
+         * Author: Tysha Daniels on April 18, 2025
+         * Purpose: Resets the user's password using uid + token from the emailed link.
+         * Input: uid, token, newPassword
+         * Return: { message, statusCode }
+         */
+        async resetPassword(uid: string, token: string, newPassword: string): Promise<any> {
+            return this.axiosObj
+                .post(
+                    API_BASE_URL + "/api/user/reset-password/",
+                    { uid, token, new_password: newPassword },
+                    { headers: {} }
+                )
+                .then((response) => response?.data)
+                .catch((error) => { throw error?.response?.data; });
+        }
     
 }
 
