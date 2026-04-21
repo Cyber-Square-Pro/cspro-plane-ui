@@ -48,7 +48,22 @@ export class AuthService extends APIService {
             return Promise.resolve();
           }
     
+        async forgotPassword(email: string): Promise<any> {
+            return this.axiosObj
+                .post(API_BASE_URL + "/api/user/forgot-password/", { email }, { headers: {} })
+                .then((response) => response?.data)
+                .catch((error) => { throw error?.response?.data; });
+        }
+
+        async resetPassword(uid: string, token: string, newPassword: string): Promise<any> {
+            return this.axiosObj
+                .post(
+                    API_BASE_URL + "/api/user/reset-password/",
+                    { uid, token, new_password: newPassword },
+                    { headers: {} }
+                )
+                .then((response) => response?.data)
+                .catch((error) => { throw error?.response?.data; });
+        }
+
 }
-
-
-  
