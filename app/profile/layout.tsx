@@ -1,10 +1,16 @@
-"use client"
+"use client";
 import React from "react";
 import { ChevronLeft, LogOut, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import Sidebar from "@/components/sidebar/profile-settings-sidebar/sidebar";
-import { PROFILE_ACTION_LINKS, WORKSPACE_ACTION_LINKS } from "@/constants/profile";
-import "react-toastify/dist/ReactToastify.css";
+import {
+  PROFILE_ACTION_LINKS,
+  WORKSPACE_ACTION_LINKS,
+} from "@/constants/profile";
+// import "react-toastify/dist/ReactToastify.css";
+import { useMobxStore } from "@/store/store.provider";
+import { AuthService } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
 
 /*
   Author: Muhammed Adnan on June 2nd, 2024
@@ -13,7 +19,25 @@ import "react-toastify/dist/ReactToastify.css";
     - children: ReactNode - The content to be rendered within the layout.
 */
 
-const ProfileSettingsLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ProfileSettingsLayout: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const authService = new AuthService();
+  const router = useRouter();
+  const {
+    user: { updateUserOnLogout },
+  } = useMobxStore();
+
+  const handleLogout = async () => {
+    try {
+      await authService.userLogout();
+      updateUserOnLogout();
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <div className="flex h-screen">
       <div className="flex flex-col fixed h-full w-[280px] border-r">
@@ -22,22 +46,34 @@ const ProfileSettingsLayout: React.FC<{ children: React.ReactNode }> = ({ childr
             <ChevronLeft size={20} strokeWidth={1} />
             <h6 className="font-semibold">Profile settings</h6>
           </Link>
-        <h6 className="text-[13px] font-semibold text-gray-500 mt-3 ml-1 mb-1">Your account</h6>
+          <h6 className="text-[13px] font-semibold text-gray-500 mt-3 ml-1 mb-1">
+            Your account
+          </h6>
           <Sidebar RouteList={PROFILE_ACTION_LINKS} />
-        <h6 className="text-[13px] font-semibold text-gray-500 mt-3 ml-1 mb-2 rounded-sm hover:bg">Workspaces</h6>
-        <Link href="/workspaces/dashboard" className="flex items-center justify-center text-[13px] cursor-pointer">
-          <button className="flex w-full items-center gap-x-2 px-3 py-1 rounded-sm hover:bg-gray-200 font-[500]">
-              <span className="flex items-center justify-center h-6 w-6 rounded bg-blue-900 text-white ">S</span>
+          <h6 className="text-[13px] font-semibold text-gray-500 mt-3 ml-1 mb-2 rounded-sm hover:bg">
+            Workspaces
+          </h6>
+          <Link
+            href="/workspaces/dashboard"
+            className="flex items-center justify-center text-[13px] cursor-pointer"
+          >
+            <button className="flex w-full items-center gap-x-2 px-3 py-1 rounded-sm hover:bg-gray-200 font-[500]">
+              <span className="flex items-center justify-center h-6 w-6 rounded bg-blue-900 text-white ">
+                S
+              </span>
               <h6>Workspace Name</h6>
-          </button>
-        </Link>
-        <Sidebar RouteList={WORKSPACE_ACTION_LINKS} />
+            </button>
+          </Link>
+          <Sidebar RouteList={WORKSPACE_ACTION_LINKS} />
         </div>
-        
+
         <div className="bottom-0 left-0 right-0 flex justify-between items-center">
           <div className="ml-3 items-center">
-            <button className="w-full flex items-center justify-start text-red-500 gap-2 p-2">
-              <LogOut size={14}/>
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center justify-start text-red-500 gap-2 p-2"
+            >
+              <LogOut size={14} />
               <span className="text-[13px] font-[500]">Sign out</span>
             </button>
           </div>
