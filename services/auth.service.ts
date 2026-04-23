@@ -39,6 +39,17 @@ export class AuthService extends APIService {
                 throw error?.response?.data;
               });
           }
+
+    async requestPasswordReset(data: { email: string }): Promise<any> {
+      return this.axiosObj
+        .post(API_BASE_URL + "/api/user/forgot-password/", data)
+        .then((response) => {
+          return response?.data;
+        })
+        .catch((error) => {
+          throw error?.response?.data;
+        });
+    }
         
         
         // Created by: Sreethu EA on May 24th, 2024 - logs out the user,removes token
