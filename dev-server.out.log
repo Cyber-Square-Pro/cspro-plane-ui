@@ -1,0 +1,13 @@
+
+> cs-plane-ui@0.1.0 dev
+> next dev -p 3011
+
+   ▲ Next.js 14.1.4
+   - Local:        http://localhost:3011
+   - Environments: .env.local, .env
+
+ ✓ Ready in 16.5s
+ ○ Compiling / ...
+ ✓ Compiled / in 31.1s (760 modules)
+next url http://127.0.0.1:8000/
+ ✓ Compiled in 1594ms (354 modules)
