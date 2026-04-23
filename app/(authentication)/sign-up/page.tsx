@@ -48,7 +48,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="max-w-xl px-4 w-full">
         <FormHeading headingText="Sign Up On Plane" />
         <FormDescription descriptionText="Create an account and track your issues, projects and workspaces." />

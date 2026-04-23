@@ -75,28 +75,24 @@ const SignInPage = () => {
     };
 
   return (
-    <>
+    <div className="min-h-screen flex items-center justify-center bg-transparent">
       {isLoading ? (
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center w-full h-full min-h-[400px]">
           <Spinner size="large" />
         </div>
       ) : (
-        <>
-          <div className="flex justify-center items-center h-full">
-            <div className="max-w-xl px-4 w-full">
-              <FormHeading headingText="Welcome Back to CS Pro !!" />
-
-              <FormDescription descriptionText="Get back to your issues, projects and workspaces." />
-
-              <div>
-                <SignInForm onFormSubmit={onFormSubmit} />
-              </div>
+        <div className="flex items-center justify-center w-full">
+          <div className="max-w-xl px-4 w-full">
+            <FormHeading headingText="Welcome Back, let's get on board!!" />
+            <FormDescription descriptionText="Get back to your issues, projects and workspaces." />
+            <div>
+              <SignInForm onFormSubmit={onFormSubmit} />
             </div>
-            <ToastContainer />
           </div>
-        </>
+          <ToastContainer />
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

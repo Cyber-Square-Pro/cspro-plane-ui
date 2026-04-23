@@ -158,7 +158,7 @@ export const CreateProjectModal = () => {
       className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-50 z-50 flex justify-center items-center"
     >
       <ToastContainer />
-      <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-xl h-[70vh] overflow-y-auto flex flex-col">
+      <div className="max-w-xl mx-auto p-4 sm:p-6 bg-white rounded-2xl shadow-lg border border-gray-400 mt-8 mb-8 h-[80vh] overflow-y-auto flex flex-col">
         <div
           className="relative w-full h-36 bg-cover bg-center rounded-t-xl"
           style={{
