@@ -48,7 +48,26 @@ export class AuthService extends APIService {
             return Promise.resolve();
           }
     
+    // New Methods For Forgot/Reset Password
+    async forgotPassword(email: string): Promise<any> {
+      return this.axiosObj
+        .post(API_BASE_URL + "/api/user/forgot-password/", { email })
+        .then((response) => {
+          return response?.data;
+        })
+        .catch((error) => {
+          throw error?.response?.data;
+        });
+    }
+
+    async resetPassword(token: string, newPassword: string): Promise<any> {
+      return this.axiosObj
+        .post(API_BASE_URL + "/api/user/reset-password/", { token, newPassword })
+        .then((response) => {
+          return response?.data;
+        })
+        .catch((error) => {
+          throw error?.response?.data;
+        });
+    }
 }
-
-
-  
