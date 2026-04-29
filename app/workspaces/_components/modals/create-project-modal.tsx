@@ -212,6 +212,7 @@ export const CreateProjectModal = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-1 flex-grow">
             <div className="md:col-span-3">
+              <label className="text-sm">Project Name:</label>
               <Input
                 className="w-full border rounded-md"
                 placeholder="Enter your project name"
@@ -236,6 +237,7 @@ export const CreateProjectModal = () => {
             )}
 
             <div className="relative">
+              <label className="text-sm"> Project ID: </label>
               <Input
                 className="w-full border rounded-md"
                 placeholder="Project ID"
@@ -251,9 +253,10 @@ export const CreateProjectModal = () => {
               </p>
             )}
             <div className="md:col-span-4">
+              <label className="text-sm">Description:</label>
               <Textarea
                 className="w-full px-2 py-1.5 border rounded-md text-xs focus:border-blue-400 h-32"
-                placeholder="Description"
+                placeholder="Describe your project in a few sentences"
                 {...register("description")}
               />
             </div>
@@ -265,6 +268,7 @@ export const CreateProjectModal = () => {
           </div>
           <div className="relative flex items-center gap-2 mt-3">
             <div className="relative flex items-center gap-2 mt-3">
+              <label className="text-sm"> Project Visbility: </label>
               <button
                 type="button"
                 className="flex items-center gap-1 px-3 py-2 border rounded-md text-xs"
@@ -314,14 +318,14 @@ export const CreateProjectModal = () => {
           <div className="flex justify-end gap-2 pt-3 border-t mt-auto">
             <Button
               type="button"
-              className="px-3 py-2 border bg-white text-black rounded text-xs"
+              className="px-3 py-2 border bg-white text-black rounded text-xs hover:bg-gray-100"
               onClick={handleClose}
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="px-3 py-2 bg-blue-600 text-white rounded text-xs"
+              className="px-3 py-2 bg-white border border-blue-600 text-blue-600 rounded text-xs hover:text-white"
             >
               Create project
             </Button>
