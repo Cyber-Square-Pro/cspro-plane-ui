@@ -38,7 +38,6 @@ export const SignInForm: React.FC<Props> = (props) => {
             {...register("email")}
           />
         </div>
-
         <div>
           <div className="relative">
             <Input
@@ -54,16 +53,18 @@ export const SignInForm: React.FC<Props> = (props) => {
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </span>
           </div>
-          <div className="flex justify-end mt-1">
+
+          <div className="py-1 text-right">
             <Link
               href="/forgot-password"
-              className="text-xs text-muted-foreground hover:text-primary hover:underline transition-colors"
+              className="text-xs text-gray-500 hover:underline"
             >
               Forgot password?
             </Link>
           </div>
         </div>
-        <div>
+
+        <div className="py-2">
           <Button
             className="w-full border rounded-md"
             disabled={!isValid}
@@ -71,6 +72,11 @@ export const SignInForm: React.FC<Props> = (props) => {
           >
             Login
           </Button>
+        </div>
+
+        <div className="py-2 text-center">
+          <span className="bg-slate-50"> Dont have an account?</span>
+          <Link href="/sign-up"> Signup</Link>
         </div>
       </div>
     </form>
