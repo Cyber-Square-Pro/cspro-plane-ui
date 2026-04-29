@@ -35,7 +35,7 @@ const WorkspacePopover: React.FC = () => {
   } = useMobxStore();
 
   const workspaceDisplayTxt = workspaces
-    ? workspaces[0].name[0].toUpperCase()
+    ? workspaces[0]?.name[0].toUpperCase()
     : "";
   const email = currentUser?.email;
 
@@ -62,7 +62,7 @@ const WorkspacePopover: React.FC = () => {
               {workspaceDisplayTxt}
             </span>
             <span className="text-black truncate text-base font-medium">
-              {workspaces && workspaces[0].name.replace(/\s+/g, "-")}
+              {workspaces && workspaces[0]?.name.replace(/\s+/g, "-")}
             </span>
           </button>
         </PopoverTrigger>
