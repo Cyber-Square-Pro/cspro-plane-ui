@@ -4,33 +4,31 @@ import { Input } from "@/components/ui/input";
 import {
   ForgotPasswordValidator,
   TForgotPasswordValidator,
-} from "@/lib/validators/account/forgotpassword.validator";
+} from "@/lib/validators/account/forgot-password.validator";
+import { IForgotPasswordFormValues } from "@/types/forgot-password";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-/*
-  Author: Tysha Daniels on April 18, 2025
-  Purpose: Form component for the Forgot Password page.
-           Accepts user's email and triggers the password reset email flow.
-  Props:
-    - onFormSubmit: callback fired with validated email data
-    - isLoading: shows a disabled state while the request is in-flight
-*/
-
 interface Props {
-  onFormSubmit: (formData: TForgotPasswordValidator) => void;
-  isLoading?: boolean;
+  isSubmitting: boolean;
+  statusMessage?: string;
+  statusType?: "success" | "error";
+  onFormSubmit: (formData: IForgotPasswordFormValues) => void;
 }
 
 export const ForgotPasswordForm: React.FC<Props> = ({
+  isSubmitting,
+  statusMessage,
+  statusType,
   onFormSubmit,
-  isLoading = false,
 }) => {
   const {
     register,
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { errors, isValid },
   } = useForm<TForgotPasswordValidator>({
     resolver: zodResolver(ForgotPasswordValidator),
     mode: "onChange",
@@ -40,28 +38,46 @@ export const ForgotPasswordForm: React.FC<Props> = ({
     <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
       <div>
         <Input
-          id="forgot-password-email"
-          className="w-full"
-          placeholder="Enter your email address"
           type="email"
+          className="w-full border rounded-md"
+          placeholder="Enter your email"
           {...register("email")}
-          disabled={isLoading}
+          disabled={isSubmitting}
         />
         {errors.email && (
-          <span className="text-red-500 text-[13px] mt-1 block">
-            {errors.email.message}
-          </span>
+          <p className="text-red-500 text-sm mt-1">
+            {errors.email.message as string}
+          </p>
         )}
       </div>
 
       <Button
-        id="forgot-password-submit"
-        className="w-full"
-        disabled={!isValid || isLoading}
+        className="w-full border rounded-md"
+        disabled={!isValid || isSubmitting}
         type="submit"
       >
-        {isLoading ? "Sending..." : "Send Reset Link"}
+        {isSubmitting ? "Sending..." : "Send Reset Link"}
       </Button>
+
+      {statusMessage && (
+        <div
+          className={`text-center py-2 ${
+            statusType === "success"
+              ? "text-green-600 bg-green-50"
+              : statusType === "error"
+              ? "text-red-600 bg-red-50"
+              : ""
+          }`}
+        >
+          {statusMessage}
+        </div>
+      )}
+
+      <div className="text-center py-2">
+        <Link href="/sign-in" className="text-blue-600 hover:underline">
+          Back to Login
+        </Link>
+      </div>
     </form>
   );
 };
