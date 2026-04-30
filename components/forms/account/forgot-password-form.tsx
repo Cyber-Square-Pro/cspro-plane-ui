@@ -4,8 +4,7 @@ import { Input } from "@/components/ui/input";
 import {
   ForgotPasswordValidator,
   TForgotPasswordValidator,
-} from "@/lib/validators/account/forgot-password.validator";
-import { IForgotPasswordFormValues } from "@/types/forgot-password";
+} from "@/lib/validators/account/forgotpassword.validator";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -16,7 +15,8 @@ interface Props {
   isSubmitting: boolean;
   statusMessage?: string;
   statusType?: "success" | "error";
-  onFormSubmit: (formData: IForgotPasswordFormValues) => void;
+  onFormSubmit: (data: TForgotPasswordValidator) => void;
+  
 }
 
 export const ForgotPasswordForm: React.FC<Props> = ({
