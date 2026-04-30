@@ -7,9 +7,9 @@ import { AuthService } from "@/services/auth.service";
 import { Toast } from "@/lib/toast/toast";
 import { ToastContainer } from "react-toastify";
 import { useMobxStore } from "@/store/store.provider";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import Link from "next/link";
 import { Spinner } from "@/components/spinner";
-import { FormHeading } from "@/components/form-elements/form-heading";
-import FormDescription from "@/components/form-elements/form.description";
  
 /*
   Author: Mohammed Rifad on April 12th, 2024
@@ -57,46 +57,58 @@ const SignInPage = () => {
   }, [fetchCurrentUser, handleLoginRedirection]);
 
     const onFormSubmit = async (formData: IEmailPasswordFormValues) => {
-
+      setLoading(true); // Show spinner immediately when Login is clicked
 
       return authService.userSignIn(formData).then((response) => {
         if (response?.statusCode == 200) {
           toast.showToast("success", response?.message);
-          setLoading(true);
           mutateUserInfo();
         } else {
-          setLoading(false);
+          setLoading(false); // Hide spinner so user can try again
           toast.showToast("error", response?.message);
         }
+      }).catch(() => {
+        setLoading(false); // Hide spinner if the request itself fails (network error, etc.)
+        toast.showToast("error", "Something went wrong. Please try again.");
       });
-
-      
-      
     };
 
   return (
     <>
-      {isLoading ? (
-        <div className="flex justify-center items-center h-full">
-          <Spinner size="large" />
-        </div>
-      ) : (
-        <>
-          <div className="flex justify-center items-center h-full">
-            <div className="max-w-xl px-4 w-full">
-              <FormHeading headingText="Welcome Back to CS Pro !!" />
+  <div className="flex justify-center items-center h-full">
+    <Card className="max-w-xl w-full mx-4">
+      <CardHeader className="text-center">
+        <CardTitle>Welcome Back to CS Pro !!</CardTitle>
+        <CardDescription>
+          Get back to your issues, projects and workspaces.
+        </CardDescription>
+      </CardHeader>
 
-              <FormDescription descriptionText="Get back to your issues, projects and workspaces." />
-
-              <div>
-                <SignInForm onFormSubmit={onFormSubmit} />
-              </div>
+      <CardContent>
+        <div className="relative">
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-card/80 z-10 rounded-md">
+              <Spinner size="large" />
             </div>
-            <ToastContainer />
+          )}
+          <div className={isLoading ? "opacity-50 pointer-events-none" : ""}>
+            <SignInForm onFormSubmit={onFormSubmit} />
           </div>
-        </>
-      )}
-    </>
+        </div>
+      </CardContent>
+
+      <CardFooter className="justify-center gap-1">
+        <span className="text-sm text-muted-foreground">
+          Don&apos;t have an account?
+        </span>
+        <Link href="/sign-up" className="text-sm text-primary hover:underline">
+          Signup
+        </Link>
+      </CardFooter>
+    </Card>
+    <ToastContainer />
+  </div>
+</>
   );
 };
 
