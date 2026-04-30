@@ -109,17 +109,17 @@ const WorkspacePopover: React.FC = () => {
               </span>
             </div>
             <br />
-            <div className="flex items-center">
+            <Link href="/profile" passHref className="flex items-center">
               <CircleUserRound />
               <span className="ml-2 text-sm max-w-prose text-slate-600">
-                View profiles
+                Profile Settings
               </span>
-            </div>
+            </Link>
             <br />
             <Link  href={`/workspaces/${currentWorkspace}/settings/`} className="flex items-center">
               <Settings />
               <span className="ml-2 text-sm max-w-prose text-slate-600">
-                Settings
+                Workspace Settings
               </span>
             </Link>
             <br />
