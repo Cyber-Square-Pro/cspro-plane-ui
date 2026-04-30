@@ -70,6 +70,7 @@ export interface ICreateProject {
 
 
 export interface IProjectLite {
+  status: string; //status of project
   id: number;
   project_name: string;
   description: string;
