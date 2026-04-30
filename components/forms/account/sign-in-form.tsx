@@ -60,6 +60,13 @@ const [showPassword, setShowPassword] = React.useState(false);
           </button>
         </div>
       </div>
+      
+      <div className="flex justify-end py-2">
+      <Link href="/forget-password"
+       className="text-sm text-blue-600 hover:text-blue-500 hover:underline transition-colors">
+      forgot password?
+      </Link>
+      </div>
 
       <div className="py-2">
         <Button

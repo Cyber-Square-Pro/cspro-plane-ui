@@ -34,24 +34,25 @@ const ProjectCreateForm: React.FC<Props> = (props) => {
   return (
     <form >
       <div className="flex">
-        <div className="flex flex-row  w-full">
+        <div className="flex flex-row w-full gap-2">
           <div className="px-1 py-2  w-[78%]">
             <Input
-              className="border rounded-md"
+              autoFocus
+              className="border rounded-md placeholder:text-blue-500"
               placeholder="Project name"
               type="password"
             />
           </div>
           <div className="py-2 px-1 w-[22%]">
             <Input
-              className="border rounded-md"
+              className="border rounded-md placeholder:text-red-500"
               placeholder="Project ID"
               type="password"
             />
           </div>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex placeholder:text-red-500">
         <Textarea placeholder="Description..." />
       </div>
 

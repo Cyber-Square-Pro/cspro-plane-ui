@@ -14,7 +14,7 @@ const ProjectDetails = () => {
   })
 
   return (
-    <div> hello world</div>
+    <div> hello world, Your project has been created</div>
   )
 }
 
