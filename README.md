@@ -92,3 +92,11 @@ lint: Runs ESLint to check for linting errors.
 **CMPS 4131 - Software Engineering - Group 2**
 
 This repository is used as part of a hands-on CI/CD training exercise at the University of Belize.
+
+## CI/CD
+
+This project uses GitHub Actions for automated builds and deployments.
+
+- Pushing to `main` triggers the pipeline automatically.
+- The pipeline installs dependencies, builds the app, and deploys to AWS.
+- Monitor pipeline runs under the **Actions** tab on GitHub.
