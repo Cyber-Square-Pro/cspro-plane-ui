@@ -21,6 +21,13 @@ outstanding results.
 - Dark Mode (coming soon): Switch between light and dark themes for improved accessibility and user comfort.
 - Notifications (coming soon): Receive alerts for issue updates, sprint changes, and important project activity.
 
+## Tech Stack
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Axios
+
 ## Installation
 
 Setting up local environment is extremely easy and straight forward. Follow the below step and you will be ready to contribute.
