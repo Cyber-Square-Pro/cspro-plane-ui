@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
-import { CircleUserRound, Settings, LogOut } from "lucide-react";
+import { CircleUserRound, Settings, LogOut, KeyRound } from "lucide-react";
 import { useMobxStore } from "@/store/store.provider";
+import { AuthService } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
 
 /* 
   Author: Sreethu EA on May 23, 2024
@@ -14,11 +16,24 @@ import { useMobxStore } from "@/store/store.provider";
 */
 
 const ProfilePopover: React.FC = () => {
+  const authService = new AuthService();
+  const router = useRouter();
+  const {
+    user: { currentUser, updateUserOnLogout },
+  } = useMobxStore();
 
-  const {user: { currentUser },} = useMobxStore();
-  
-  const displayChar = currentUser?.first_name[0].toUpperCase()
-  const email = currentUser?.email
+  const displayChar = currentUser?.first_name?.[0]?.toUpperCase() || "";
+  const email = currentUser?.email || "";
+
+  const handleLogout = async () => {
+    try {
+      await authService.userLogout();
+      updateUserOnLogout();
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   
   return (
     <>
@@ -56,12 +71,28 @@ const ProfilePopover: React.FC = () => {
             </div>
 
             <br />
+
+            <div className="flex items-center">
+              <Link href="/profile/security" passHref>
+                <div className="flex items-center">
+                  <KeyRound />
+                  <span className="ml-2 text-sm max-w-prose text-slate-600">
+                    Security
+                  </span>
+                </div>
+              </Link>
+            </div>
+
+            <br />
             <hr />
             <div className="flex items-center">
-              <LogOut />
-              <span className="ml-2 text-sm max-w-prose text-slate-600">
-                Sign Out
-              </span>
+              <button
+                onClick={handleLogout}
+                className="flex items-center text-red-500 w-full text-left"
+              >
+                <LogOut className="mr-2" color="red" />
+                <span className="text-sm max-w-prose">Sign Out</span>
+              </button>
             </div>
           </div>
         </PopoverContent>

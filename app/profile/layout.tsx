@@ -4,7 +4,11 @@ import { ChevronLeft, LogOut, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import Sidebar from "@/components/sidebar/profile-settings-sidebar/sidebar";
 import { PROFILE_ACTION_LINKS, WORKSPACE_ACTION_LINKS } from "@/constants/profile";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
+
+import { useMobxStore } from "@/store/store.provider";
+import { AuthService } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
 
 /*
   Author: Muhammed Adnan on June 2nd, 2024
@@ -14,6 +18,20 @@ import "react-toastify/dist/ReactToastify.css";
 */
 
 const ProfileSettingsLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const authService = new AuthService();
+  const router = useRouter();
+  const { user: { updateUserOnLogout } } = useMobxStore();
+
+  const handleLogout = async () => {
+    try {
+      await authService.userLogout();
+      updateUserOnLogout();
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+  
   return (
     <div className="flex h-screen">
       <div className="flex flex-col fixed h-full w-[280px] border-r">
@@ -36,7 +54,10 @@ const ProfileSettingsLayout: React.FC<{ children: React.ReactNode }> = ({ childr
         
         <div className="bottom-0 left-0 right-0 flex justify-between items-center">
           <div className="ml-3 items-center">
-            <button className="w-full flex items-center justify-start text-red-500 gap-2 p-2">
+            <button 
+              onClick={handleLogout}
+              className="w-full flex items-center justify-start text-red-500 gap-2 p-2"
+            >
               <LogOut size={14}/>
               <span className="text-[13px] font-[500]">Sign out</span>
             </button>
