@@ -83,9 +83,8 @@ lint: Runs ESLint to check for linting errors.
 
 ## UB Course Information
 
-- CMPS4131 - Software Engineering
+- CMPS4131 - Software Engineering Session 1
 
 
 Session 1: 
-  University of Belize - CI/CD Cohort
-  Task Message - Local Note 25
+Git pull request task
