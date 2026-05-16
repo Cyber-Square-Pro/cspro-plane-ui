@@ -6,6 +6,7 @@ import { UserGreeting } from "./user-greeting";
 import {
   BarChart2,
   HomeIcon,
+  TrendingUp, // ADDED: New icon for stats banner
 } from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
@@ -38,6 +39,32 @@ export const DashboardOverView: React.FC = () => {
         <div className="flex-1 overflow-y-auto bg-zinc-100">
         <div className="space-y-7 p-7 h-full w-full flex flex-col">
           <UserGreeting displayName = {userName} />
+          
+          {/* ADDED: New statistics summary banner for better visibility of key metrics */}
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-4 text-white shadow-lg">
+            <div className="flex items-center gap-2 mb-3">
+              <TrendingUp className="w-5 h-5" />
+              <span className="font-semibold">Quick Stats</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white/20 rounded-lg p-2 backdrop-blur-sm">
+                <div className="text-xs opacity-90">Total Issues</div>
+                <div className="text-2xl font-bold">0</div>
+              </div>
+              <div className="bg-white/20 rounded-lg p-2 backdrop-blur-sm">
+                <div className="text-xs opacity-90">Completion Rate</div>
+                <div className="text-2xl font-bold">0%</div>
+              </div>
+              <div className="bg-white/20 rounded-lg p-2 backdrop-blur-sm">
+                <div className="text-xs opacity-90">Active Projects</div>
+                <div className="text-2xl font-bold">0</div>
+              </div>
+              <div className="bg-white/20 rounded-lg p-2 backdrop-blur-sm">
+                <div className="text-xs opacity-90">Team Members</div>
+                <div className="text-2xl font-bold">0</div>
+              </div>
+            </div>
+          </div>
  
           <div className="grid lg:grid-cols-2 gap-7">
             <div className="lg:col-span-2">
@@ -73,6 +100,6 @@ export const DashboardOverView: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>
+  );
 };
