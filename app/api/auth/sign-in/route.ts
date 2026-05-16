@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
 
     console.log("API Initialized: Sign-in route hit");
-    console.log("[UB-25] API Initialization Logging Enabled");
     const requestBody = await request.json?.();
 
     const response = await fetch("http://localhost:8000/api/sign-in/", {
