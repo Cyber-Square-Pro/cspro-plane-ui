@@ -89,6 +89,7 @@ start: Starts the production server.
 
 lint: Runs ESLint to check for linting errors.
 # UB CI/CD Cohort Information
+**University of Belize - CI/CD Cohort**
 **CMPS 4131 - Software Engineering - Group 2**
 
 This repository is used as part of a hands-on CI/CD training exercise at the University of Belize.
