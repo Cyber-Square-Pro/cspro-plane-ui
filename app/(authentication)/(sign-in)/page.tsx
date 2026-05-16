@@ -86,7 +86,7 @@ const SignInPage = () => {
             <div className="max-w-xl px-4 w-full">
               <FormHeading headingText="Welcome Back to CS Pro !!" />
 
-              <FormDescription descriptionText="Get back to your issues, projects and workspaces." />
+              <FormDescription descriptionText="University of Belize Cohort - Get back to your issues, projects and workspaces." />
 
               <div>
                 <SignInForm onFormSubmit={onFormSubmit} />
