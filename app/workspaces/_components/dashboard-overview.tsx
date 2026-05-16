@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import DashboardHeader from "./headers/dashboard-header";
 import { useMobxStore } from "@/store/store.provider";
+import { CheckCircle, Clock, AlertTriangle, ListTodo} from "lucide-react"; // issue status card icons
  
 /*
   Author: Fidha Noushad on May 20th, 2024
@@ -16,6 +17,7 @@ import { useMobxStore } from "@/store/store.provider";
   Props: None
   updated by: - Mohammed Rifad on May 23nd, 2024 - added reusable dashboard header
               - Muhammed Adnan on May 25th, 2024 - Sticky header, removed multi-scrollbar's
+              - Andres Hung on April 3rd, 2026 - Add icons and color to issue status cards
 
 */
 
@@ -41,11 +43,12 @@ export const DashboardOverView: React.FC = () => {
  
           <div className="grid lg:grid-cols-2 gap-7">
             <div className="lg:col-span-2">
-              <div className="bg-[#ffffff] rounded-xl border-[0.5px] w-full grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 p-0.5 hover:shadow-md duration-300 [&>div>a>div]:border-r [&>div:last-child>a>div]:border-0 [&>div>a>div]:border-2[&>div:nth-child(2)>a>div]:border-0 [&>div:nth-child(2)>a>div]:lg:border-r">
-                <IssueStatusCard count={0} description="Issues Assigned" />
-                <IssueStatusCard count={0} description="Issues Created" />
-                <IssueStatusCard count={0} description="Issues Overdue" />
-                <IssueStatusCard count={0} description="Issues Completed" />
+              <div className="bg-[#ffffff] rounded-xl border-[0.5px] w-full grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 p-0.5 hover:shadow-md duration-300 [&>div>a>div]:border-r [&>div:last-child>a>div]:border-0 [&>div>a>div]:border-2[&>div:nth-child(2)>a>div]:border-0 [&>div:nth-child(2)>a>div]:lg:border-r">
+                {/* Render issue status cards with an icon and in color */}
+                <IssueStatusCard count={0} description="Issues Assigned" icon={ListTodo} color="text-blue-500" hoverBg="hover:bg-blue-50"/>
+                <IssueStatusCard count={0} description="Issues Created" icon={Clock} color="text-yellow-500" hoverBg="hover:bg-yellow-50"/>
+                <IssueStatusCard count={0} description="Issues Overdue" icon={AlertTriangle} color="text-red-500" hoverBg="hover:bg-red-50"/>
+                <IssueStatusCard count={0} description="Issues Completed" icon={CheckCircle} color="text-green-500" hoverBg="hover:bg-green-50"/>
               </div>
             </div>
 
