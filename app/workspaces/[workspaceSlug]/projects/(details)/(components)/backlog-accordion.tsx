@@ -10,8 +10,13 @@ import { MoveDown } from "lucide-react";
 import IssueRow from "./issue-row";
 import { Button } from "@/components/ui/button";
 import { InlineCreateIssue } from "./inline-create";
+import { useParams } from "next/navigation";
+import { useMobxStore } from "@/store/store.provider";
 
 const BacklogAccordion = () => {
+  const { workspaceSlug, projectId } = useParams<{ workspaceSlug: string, projectId: string }>();
+  const { project: { createIssue } } = useMobxStore();
+
   return (
     <div>
       <Accordion type="single" collapsible defaultValue="item-1">
@@ -53,7 +58,9 @@ const BacklogAccordion = () => {
             <InlineCreateIssue
               onSave={(title) => {
                 console.log("Saving to MobX:", title);
-                // projectStore.createIssue({ title, sprintId: 'item-1' });
+                if (workspaceSlug && projectId) {
+                  createIssue(workspaceSlug, projectId, { title });
+                }
               }}
             />
           </AccordionContent>
