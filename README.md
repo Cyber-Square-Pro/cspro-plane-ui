@@ -1,6 +1,5 @@
-# University of Belize - CI/CD Cohort
+# CS Pro Plane – Project Management Platform | University of Belize
 
-# Plane App UI
 **What is CS Pro Plane App?**
 
 CS Pro Plane is a versatile and comprehensive project management software built for teams that prioritize delivering exceptional customer
@@ -20,7 +19,15 @@ outstanding results.
 - Modules: Break down your large projects into smaller, more manageable modules. Assign modules between teams to track and plan your project's progress easily.
 - Analytics: Get insights into all your CS Pro Plane data in real-time. Visualize issue data to spot trends, remove blockers, and progress your work.
 - Time tracking (coming soon): CS Pro Plane also includes a powerful time tracking feature, allowing teams to monitor the time spent on tasks and projects accurately.
+- Dark Mode (coming soon): Switch between light and dark themes for improved accessibility and user comfort.
+- Notifications (coming soon): Receive alerts for issue updates, sprint changes, and important project activity.
 
+## Tech Stack
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Axios
 
 ## Installation
 
@@ -82,3 +89,15 @@ build: Builds the application for production.
 start: Starts the production server.
 
 lint: Runs ESLint to check for linting errors.
+# UB CI/CD Cohort Information
+**CMPS 4131 - Software Engineering - Group 2**
+
+This repository is used as part of a hands-on CI/CD training exercise at the University of Belize.
+
+## CI/CD
+
+This project uses GitHub Actions for automated builds and deployments.
+
+- Pushing to `main` triggers the pipeline automatically.
+- The pipeline installs dependencies, builds the app, and deploys to AWS.
+- Monitor pipeline runs under the **Actions** tab on GitHub.
