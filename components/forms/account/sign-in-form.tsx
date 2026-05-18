@@ -27,8 +27,8 @@ export const SignInForm: React.FC<Props> = (props) => {
   const { onFormSubmit } = props;
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)}>
-      <div className="py-2">
+    <form onSubmit={handleSubmit(onFormSubmit)} className="bg-slate-200 rounded-md">
+      <div className="p-2">
          
         <Input
           className="w-full border rounded-md"
@@ -37,7 +37,7 @@ export const SignInForm: React.FC<Props> = (props) => {
         />
       </div>
 
-      <div className="py-2">
+      <div className="p-2">
         <Input
           className="w-full border rounded-md"
           placeholder="Enter your password"
@@ -45,16 +45,25 @@ export const SignInForm: React.FC<Props> = (props) => {
           {...register("password")}
         />
       </div>
-      <div className="py-2">
+      <div className="p-2">
         <Button
-          className="w-full border rounded-md"
+          className="w-full border rounded-md bg-green-500 hover:bg-green-700"
           disabled={!isValid}
           type="submit"
         >
           Login
         </Button>
       </div>
-      <div className="py-2 text-center">
+      <div className="p-2">
+        <Button
+          className="w-full border rounded-md bg-slate-500 hover:bg-slate-700"
+          disabled={!isValid}
+          type="button"
+        >
+          Cancel
+        </Button>
+      </div>
+      <div className="p-2 text-center">
         <span className="bg-slate-50"> Dont have an account?</span>
         <Link href="/sign-up"> Signup</Link>
       </div>
