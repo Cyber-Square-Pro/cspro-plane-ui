@@ -2,6 +2,7 @@ import { API_BASE_URL } from "@/config/server.api.config";
 import { APIService } from "./api.service";
 import { IEmailPasswordFormValues } from "@/types/user";
 import axios, { AxiosInstance } from "axios";
+import { string } from "zod";
 
 export class AuthService extends APIService {
 
@@ -48,7 +49,27 @@ export class AuthService extends APIService {
             return Promise.resolve();
           }
     
+
+      async forgetPassword(email:string): Promise<any> {
+        
+         return this.axiosObj.post(API_BASE_URL +"/api/user/forget-password/",
+               { email }, { headers: {} })
+              .then((response) => response?.data)
+              .catch((error) => {
+                throw error?.response?.data;
+              });
+          }
+        
+
+
+           async resetPassword(uid:string, token:string, new_password:string): Promise<any> {
+        
+          return this.axiosObj.post(API_BASE_URL +"/api/user/reset-password/",
+               { uid, token, new_password }, { headers: {} })
+              .then((response) => response?.data)
+              .catch((error) => {
+                throw error?.response?.data;
+              });
+          }
 }
-
-
   
